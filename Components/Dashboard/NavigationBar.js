@@ -21,8 +21,9 @@ import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UploadCSV from "./UploadCsv";
 import { closenav, navwidth } from "@/Lib/NavSlice";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
+import Cookies from "js-cookie";
 const NavigationBar = () => {
   const pathname = usePathname();
   const [open, setOpen] = useState(false);
@@ -50,6 +51,28 @@ const NavigationBar = () => {
       path: "/Dashboard/Courses",
     },
   ];
+  const router = useRouter();
+  const Logout = async () => {
+    await fetch("http://127.0.0.1:8000/accounts/logout/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("key")}`,
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods":
+          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Credentials": "true",
+      },
+    })
+      .then(() => {
+        Cookies.remove("key");
+        Cookies.remove("accessToken");
+      })
+      .finally(() => {
+        router.push("/");
+      });
+  };
   return (
     <Box
       width={!fullwidthNav ? "65px" : "181px"}
@@ -133,7 +156,7 @@ const NavigationBar = () => {
         sx={{ position: "absolute", bottom: "5%", left: "0", width: "100%" }}
       >
         <ListItem disablePadding>
-          <ListItemButton>
+          <ListItemButton onClick={Logout}>
             <ListItemIcon>
               <BiLogOut size={"22px"} />
             </ListItemIcon>

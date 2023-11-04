@@ -3,7 +3,8 @@ import { Box, Button, IconButton, Stack } from "@mui/material";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
 import { HiOutlineDatabase } from "react-icons/hi";
 import { useState } from "react";
-import Link from "next/link";
+import { Login } from "@/Lib/actions";
+import toast from "react-hot-toast";
 export default function HomePage() {
   const [showpass, setpassinp] = useState(false);
   return (
@@ -20,6 +21,13 @@ export default function HomePage() {
           maxWidth={{ xs: "82%", sm: "50%", md: "30%" }}
           position="relative"
           borderRadius={"2%"}
+          component={"form"}
+          action={async (data) => {
+            const result = await Login(data);
+            if (result.error) {
+              toast.error("خطا في الحساب او كلمه السر");
+            }
+          }}
         >
           <Stack alignSelf={"center"} direction={"row"} alignItems="center">
             <Box component={HiOutlineDatabase} size="25px" color={"#fb5c25"} />
@@ -73,6 +81,7 @@ export default function HomePage() {
                   fontWeight: 400,
                 }}
                 placeholder="e.g.mah@gmail.com"
+                name="email"
               />
             </Stack>
             <Stack direction={"column"} spacing="10px" position={"relative"}>
@@ -107,12 +116,11 @@ export default function HomePage() {
                   fontWeight: 400,
                 }}
                 placeholder="e.g.******"
+                name="password"
               />
             </Stack>
           </Stack>
           <Button
-            component={Link}
-            href="/Dashboard/Divisions"
             sx={{
               fontWeight: "600",
               textTransform: "none",
@@ -123,6 +131,7 @@ export default function HomePage() {
               },
               marginTop: "3rem",
             }}
+            type="submit"
           >
             Log in
           </Button>

@@ -1,5 +1,8 @@
-export default async function GetEnrollments() {
-    const response = await fetch("http://localhost:7000/enrollments");
-    return response.json();
-  }
-  
+export default async function GetEnrollments(key) {
+  const response = await fetch("http://127.0.0.1:8000/enrollments/", {
+    headers: {
+      Authorization: `Bearer ${key}`,
+    },
+  });
+  return response.json();
+}
