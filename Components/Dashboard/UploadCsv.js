@@ -83,7 +83,6 @@ const UploadCSV = ({ open, handleClose }) => {
               <Box
                 fontSize={"13px"}
                 fontWeight={300}
-                fontFamily={fonts.body}
                 marginLeft="5px"
               >
                 {file.name.substring(0, 22) + ".csv"}
@@ -91,7 +90,6 @@ const UploadCSV = ({ open, handleClose }) => {
               <Box
                 fontSize={"13px"}
                 fontWeight={300}
-                fontFamily={fonts.body}
                 marginRight="5px"
               >
                 {file.size.toString().substring(0, 2) + ".kb"}
