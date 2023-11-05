@@ -3,7 +3,8 @@ import { Box, Stack } from "@mui/material";
 import { CgMenu } from "react-icons/cg";
 import STableComponent from "./StudentsTable";
 import { StudentsFilters } from "./StudentsFilter";
-const StudentsView = ({ students, enrollments }) => {
+import UploadCSV from "../UploadCsv";
+const StudentsView = ({ students, admin }) => {
   return (
     <Box height={{ xs: "calc(100vh - 120px)", sm: "calc(100vh - 64px)" }}>
       <Stack direction={"column"} width="100%" maxHeight={"100%"}>
@@ -30,10 +31,11 @@ const StudentsView = ({ students, enrollments }) => {
             alignItems="center"
             spacing={{ xs: "4px", sm: "10px" }}
           >
+            {admin && <UploadCSV />}
             <StudentsFilters data={students} />
           </Stack>
         </Stack>
-        <STableComponent students={students} enrollments={enrollments} />
+        <STableComponent students={students} />
       </Stack>
     </Box>
   );

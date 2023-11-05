@@ -1,4 +1,3 @@
-import { AddUserAction } from "@/Lib/actions";
 import {
   Box,
   Button,
@@ -21,7 +20,8 @@ import toast from "react-hot-toast";
 import { HiUserAdd } from "react-icons/hi";
 import { RiCloseLine } from "react-icons/ri";
 import { VscEye, VscEyeClosed } from "react-icons/vsc";
-export const AddUser = ({ admin }) => {
+import Scelection from "./UserDivisionsSelection";
+export const AddUser = ({ admin, data }) => {
   const [showpass, setpassinp] = useState(false);
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -29,13 +29,22 @@ export const AddUser = ({ admin }) => {
   };
   const handleClose = () => {
     setOpen(false);
+    setUser({
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: "",
+      is_admin: false,
+      divisions: [],
+    });
   };
   const [user, setUser] = useState({
     first_name: "",
     last_name: "",
-    username: "",
+    email: "",
     password: "",
     is_admin: false,
+    divisions: [],
   });
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -57,7 +66,7 @@ export const AddUser = ({ admin }) => {
     }).then((res) => {
       if (res.ok) {
         router.refresh();
-        toast.success("تمت بنجاح");
+        toast.success("Added Succesfully");
         return handleClose();
       } else {
         const data = res.json();
@@ -84,10 +93,7 @@ export const AddUser = ({ admin }) => {
           <ListItemIcon>
             <HiUserAdd size={"22px"} />
           </ListItemIcon>
-          <ListItemText
-            primary={"اضافه مستخدم"}
-            sx={{ whiteSpace: "nowrap" }}
-          />
+          <ListItemText primary={"Add User"} sx={{ whiteSpace: "nowrap" }} />
         </ListItemButton>
       </ListItem>
       <MenuItem
@@ -99,8 +105,8 @@ export const AddUser = ({ admin }) => {
           <HiUserAdd fontSize={"25px"} />
         </ListItemIcon>
         <ListItemText>
-          اضافه مستخدم
-          <Box fontSize={"0.75rem"}>المشرف فقط</Box>
+          Add User
+          <Box fontSize={"0.75rem"}>admin only</Box>
         </ListItemText>
       </MenuItem>
       <Dialog open={open} onClose={handleClose}>
@@ -108,25 +114,21 @@ export const AddUser = ({ admin }) => {
           <Box
             alignSelf={"center "}
             fontSize="16px"
-            fontWeight={400}
+            fontWeight={600}
             marginTop="4px"
             color="#777"
           >
-            اضافه عضو جديد
+            Add User
           </Box>
           <Stack direction={"column"} spacing="20px" marginTop={"2rem"}>
-            <Stack
-              direction={"row-reverse"}
-              spacing={"1rem"}
-              alignItems={"center"}
-            >
+            <Stack direction={"row"} spacing={"1rem"} alignItems={"center"}>
               <Stack
                 direction={"column"}
                 spacing="10px"
-                alignItems={"flex-end"}
+                alignItems={"flex-start"}
               >
                 <Box fontSize="14px" fontWeight={700}>
-                  الاسم الاول
+                  First Name
                 </Box>
                 <Box
                   component={"input"}
@@ -151,10 +153,10 @@ export const AddUser = ({ admin }) => {
               <Stack
                 direction={"column"}
                 spacing="10px"
-                alignItems={"flex-end"}
+                alignItems={"flex-start"}
               >
                 <Box fontSize="14px" fontWeight={700}>
-                  الاسم الثاني
+                  Last Name
                 </Box>
                 <Box
                   component={"input"}
@@ -177,9 +179,13 @@ export const AddUser = ({ admin }) => {
                 />
               </Stack>
             </Stack>
-            <Stack direction={"column"} spacing="10px" alignItems={"flex-end"}>
+            <Stack
+              direction={"column"}
+              spacing="10px"
+              alignItems={"flex-start"}
+            >
               <Box fontSize="14px" fontWeight={700}>
-                المستخدم
+                Email
               </Box>
               <Box
                 component={"input"}
@@ -196,16 +202,16 @@ export const AddUser = ({ admin }) => {
                   fontWeight: 400,
                   width: "100%",
                 }}
-                name="username"
+                name="email"
                 onChange={handleChange}
-                value={user.username}
+                value={user.email}
               />
             </Stack>
             <Stack
               direction={"column"}
               spacing="10px"
               position={"relative"}
-              alignItems={"flex-end"}
+              alignItems={"flex-start"}
             >
               <Box
                 component={IconButton}
@@ -220,7 +226,7 @@ export const AddUser = ({ admin }) => {
                 )}
               </Box>
               <Box fontSize="14px" fontWeight={600}>
-                كلمه السر
+                Password
               </Box>
               <Box
                 component={"input"}
@@ -243,11 +249,28 @@ export const AddUser = ({ admin }) => {
                 value={user.password}
               />
             </Stack>
-            <FormGroup sx={{ alignSelf: "flex-end" }}>
+            <Stack
+              direction={"column"}
+              spacing="10px"
+              position={"relative"}
+              alignItems={"flex-start"}
+            >
+              <Box fontSize="14px" fontWeight={600}>
+                Divisions
+              </Box>
+              <Scelection data={data} user={user} setUser={setUser} />
+            </Stack>
+            <FormGroup>
               <FormControlLabel
-                sx={{ margin: "10px 0 0 0" }}
+                sx={{
+                  margin: "10px 0 0 0",
+                  ".MuiFormControlLabel-label": {
+                    fontWeight: 700,
+                    fontSize: "14px",
+                  },
+                }}
                 control={<Checkbox />}
-                label="عضو مشرف ؟"
+                label="admin?"
                 name="is_admin"
                 onChange={handleChange}
                 value={user.is_admin}
@@ -260,15 +283,18 @@ export const AddUser = ({ admin }) => {
             sx={{
               textTransform: "none",
               color: "white",
-              backgroundColor: "#0C356A",
+              backgroundColor: "#F6490D",
               ":hover": {
-                backgroundColor: "#0C356A",
+                backgroundColor: "#F6490D",
               },
             }}
-            marginTop="3rem"
+            marginTop="2rem"
             onClick={AddUserMethod}
+            // onClick={() => {
+            //   console.log(user);
+            // }}
           >
-            تسجيل
+            Submit
           </Box>
 
           <IconButton

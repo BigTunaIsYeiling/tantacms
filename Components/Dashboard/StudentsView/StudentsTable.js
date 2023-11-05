@@ -9,7 +9,7 @@ import Paper from "@mui/material/Paper";
 import StRows from "./StudentsRows";
 import { Filters, order, sort } from "@/Lib/FiltersSlices/StudentsSlice";
 import { useDispatch, useSelector } from "react-redux";
-const STableComponent = ({ students, enrollments }) => {
+const STableComponent = ({ students }) => {
   const SortType = useSelector(sort);
   const OrderType = useSelector(order);
   const dispatch = useDispatch();
@@ -177,7 +177,7 @@ const STableComponent = ({ students, enrollments }) => {
                 gpa={row.gpa}
                 passed_hours={row.passed_hours}
                 name={row.name}
-                enrollments={enrollments}
+                enrollments={row.enrollments}
                 mark={row.total_mark}
               />
             ))}

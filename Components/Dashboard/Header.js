@@ -15,9 +15,7 @@ import { HiOutlineDatabase } from "react-icons/hi";
 import { FaUserCog } from "react-icons/fa";
 import { useState } from "react";
 import { HiUserAdd } from "react-icons/hi";
-import { GrFormUpload } from "react-icons/gr";
 import { BiLogOut } from "react-icons/bi";
-import UploadCSV from "./UploadCsv";
 import { navwidth, opennav } from "@/Lib/NavSlice";
 const Header = () => {
   const fullwidthNav = useSelector(navwidth);
@@ -112,15 +110,6 @@ const Header = () => {
                 <Box fontSize={"0.75rem"}>Admins only</Box>
               </ListItemText>
             </MenuItem>
-            <MenuItem onClick={handleClickOpen}>
-              <ListItemIcon>
-                <GrFormUpload fontSize={"25px"} />
-              </ListItemIcon>
-              <ListItemText>
-                Upload Excel
-                <Box fontSize={"0.75rem"}>Admins only</Box>
-              </ListItemText>
-            </MenuItem>
             <MenuItem onClick={handleClose}>
               <ListItemIcon>
                 <BiLogOut fontSize={"25px"} />
@@ -130,7 +119,6 @@ const Header = () => {
           </Menu>
         </Toolbar>
       </AppBar>
-      <UploadCSV open={opend} handleClose={handleClosed} />
     </Box>
   );
 };

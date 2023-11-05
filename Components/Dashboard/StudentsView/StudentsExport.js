@@ -148,7 +148,14 @@ export default function ExportData({ data }) {
                   })
                   //remove the id and name from the data
                   .map((row) => {
-                    const { id, group, division, passed_hours, ...rest } = row;
+                    const {
+                      id,
+                      group,
+                      division,
+                      passed_hours,
+                      enrollments,
+                      ...rest
+                    } = row;
                     return rest;
                   }),
                 fileName: filename,

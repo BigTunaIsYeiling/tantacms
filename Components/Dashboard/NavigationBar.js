@@ -14,26 +14,17 @@ import { CgListTree } from "react-icons/cg";
 import { IoIosPeople } from "react-icons/io";
 import { SiCoursera } from "react-icons/si";
 import { RxDoubleArrowLeft } from "react-icons/rx";
-import { HiUserAdd } from "react-icons/hi";
 import { BiLogOut } from "react-icons/bi";
-import { RiFileUploadFill } from "react-icons/ri";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UploadCSV from "./UploadCsv";
 import { closenav, navwidth } from "@/Lib/NavSlice";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Cookies from "js-cookie";
-const NavigationBar = () => {
+import { AddUser } from "./AddUser";
+import { UsersList } from "./UsersLists";
+const NavigationBar = ({ admin, data, user, accounts }) => {
   const pathname = usePathname();
-  const [open, setOpen] = useState(false);
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
   const navi = useRef();
   const fullwidthNav = useSelector(navwidth);
   const dispatch = useDispatch();
@@ -128,25 +119,8 @@ const NavigationBar = () => {
       </List>
       <Divider />
       <List>
-        <ListItem disablePadding>
-          <ListItemButton disabled>
-            <ListItemIcon>
-              <HiUserAdd size={"22px"} />
-            </ListItemIcon>
-            <ListItemText primary={"Add User"} sx={{ whiteSpace: "nowrap" }} />
-          </ListItemButton>
-        </ListItem>
-        <ListItem disablePadding>
-          <ListItemButton onClick={handleClickOpen}>
-            <ListItemIcon>
-              <RiFileUploadFill size={"22px"} />
-            </ListItemIcon>
-            <ListItemText
-              primary={"Upload Excel"}
-              sx={{ whiteSpace: "nowrap" }}
-            />
-          </ListItemButton>
-        </ListItem>
+        {admin && <AddUser admin={admin} data={data} />}
+        {admin && <UsersList admin={admin} user={user} accounts={accounts} />}
       </List>
       <List
         sx={{ position: "absolute", bottom: "5%", left: "0", width: "100%" }}
@@ -160,7 +134,6 @@ const NavigationBar = () => {
           </ListItemButton>
         </ListItem>
       </List>
-      <UploadCSV open={open} handleClose={handleClose} />
     </Box>
   );
 };

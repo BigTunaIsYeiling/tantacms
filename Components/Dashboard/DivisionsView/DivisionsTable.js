@@ -36,7 +36,15 @@ const DivisionsTable = ({ divisions }) => {
                 whiteSpace: "nowrap",
               }}
             >
-              Divison
+              Name
+            </TableCell>
+            <TableCell
+              align="left"
+              sx={{
+                whiteSpace: "nowrap",
+              }}
+            >
+              Department
             </TableCell>
             <TableCell
               align="left"
@@ -49,10 +57,9 @@ const DivisionsTable = ({ divisions }) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {divisions
-            .map((row) => (
-              <DivisionsRows key={row.name} {...row} />
-            ))}
+          {divisions.map((row) => (
+            <DivisionsRows key={row.name} {...row} />
+          ))}
         </TableBody>
       </Table>
     </TableContainer>

@@ -105,14 +105,13 @@ const StRows = ({
                 </TableHead>
                 <TableBody>
                   {enrollments
-                    .filter((enr) => enr.student.name === name)
                     .sort((a, b) => {
                       return a.level - b.level;
                     })
                     .map((enroll) => {
                       return (
                         <TableRow
-                          key={enroll.id + enroll.student.name + enroll.mark}
+                          key={enroll.id + enroll.mark}
                         >
                           <TableCell component="th" scope="row">
                             {enroll.course.name}

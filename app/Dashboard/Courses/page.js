@@ -5,5 +5,5 @@ export default async function page() {
   const data = await verifyAccess();
   const CoursesData = GetCourses(data.key);
   const courses = await CoursesData;
-  return <CoursesView courses={courses} />;
+  return <CoursesView courses={courses} admin={data.user.is_admin} />;
 }
