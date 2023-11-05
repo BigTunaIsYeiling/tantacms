@@ -59,10 +59,6 @@ const NavigationBar = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("key")}`,
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Methods":
-          "GET, POST, PATCH, PUT, DELETE, OPTIONS",
-        "Access-Control-Allow-Credentials": "true",
       },
     })
       .then(() => {
