@@ -2,8 +2,9 @@
 import { Box, Stack } from "@mui/material";
 import { CgMenu } from "react-icons/cg";
 import DivisionsTable from "./DivisionsTable";
+import { AddDivision } from "../Add Components/AddDivision";
 // import exportFromJSON from "export-from-json";
-const DivisionsView = ({ divisions }) => {
+const DivisionsView = ({ divisions, data }) => {
   return (
     <Box height={{ xs: "calc(100vh - 120px)", sm: "calc(100vh - 64px)" }}>
       <Stack direction={"column"} width="100%" maxHeight={"100%"}>
@@ -30,18 +31,7 @@ const DivisionsView = ({ divisions }) => {
             alignItems="center"
             spacing={{ xs: "4px", sm: "10px" }}
           >
-            {/* <DivisionsFilters /> */}
-            {/* <Button
-              onClick={() =>
-                exportFromJSON({
-                  data: DivisionsData,
-                  fileName: "namd",
-                  exportType: exportFromJSON.types.csv,
-                })
-              }
-            >
-              Export Data
-            </Button> */}
+            <AddDivision data={data} />
           </Stack>
         </Stack>
         <DivisionsTable divisions={divisions} />

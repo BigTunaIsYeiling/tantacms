@@ -4,7 +4,7 @@ import { CgMenu } from "react-icons/cg";
 import STableComponent from "./StudentsTable";
 import { StudentsFilters } from "./StudentsFilter";
 import UploadCSV from "../UploadCsv";
-const StudentsView = ({ students, admin }) => {
+const StudentsView = ({ students, admin, divisions, groups }) => {
   return (
     <Box height={{ xs: "calc(100vh - 120px)", sm: "calc(100vh - 64px)" }}>
       <Stack direction={"column"} width="100%" maxHeight={"100%"}>
@@ -35,7 +35,11 @@ const StudentsView = ({ students, admin }) => {
             <StudentsFilters data={students} />
           </Stack>
         </Stack>
-        <STableComponent students={students} />
+        <STableComponent
+          students={students}
+          divisions={divisions}
+          groups={groups}
+        />
       </Stack>
     </Box>
   );

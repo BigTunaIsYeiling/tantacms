@@ -8,11 +8,10 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import StRows from "./StudentsRows";
 import { Filters, order, sort } from "@/Lib/FiltersSlices/StudentsSlice";
-import { useDispatch, useSelector } from "react-redux";
-const STableComponent = ({ students }) => {
+import { useSelector } from "react-redux";
+const STableComponent = ({ students, divisions, groups }) => {
   const SortType = useSelector(sort);
   const OrderType = useSelector(order);
-  const dispatch = useDispatch();
   const filtersOption = useSelector(Filters);
   return (
     <TableContainer
@@ -104,6 +103,24 @@ const STableComponent = ({ students }) => {
             >
               Total Mark
             </TableCell>
+            <TableCell
+              align="left"
+              sx={{
+                whiteSpace: "nowrap",
+                // display: HideGpaColumn ? "none" : "table-cell",
+              }}
+            >
+              Edit
+            </TableCell>
+            <TableCell
+              align="left"
+              sx={{
+                whiteSpace: "nowrap",
+                // display: HideGpaColumn ? "none" : "table-cell",
+              }}
+            >
+              Delete
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody sx={{ position: "relative" }}>
@@ -179,6 +196,8 @@ const STableComponent = ({ students }) => {
                 name={row.name}
                 enrollments={row.enrollments}
                 mark={row.total_mark}
+                groups={groups}
+                divisions={divisions}
               />
             ))}
         </TableBody>

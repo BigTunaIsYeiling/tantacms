@@ -11,6 +11,9 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
+import { EnrollmentsRows } from "./Enrollments";
+import { EditStudent } from "../Edit Components/EditStudent";
+import { DeleteStudent } from "../Delete Components/DeleteStudent";
 const StRows = ({
   id,
   name,
@@ -21,6 +24,8 @@ const StRows = ({
   enrollments,
   group,
   mark,
+  groups,
+  divisions,
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -83,24 +88,56 @@ const StRows = ({
         >
           {mark}
         </TableCell>
+        <TableCell>
+          <EditStudent
+            id={id}
+            division={division?.id}
+            name={name}
+            DivisionsData={divisions}
+            GroupsData={groups}
+            group={group?.id}
+          />
+        </TableCell>
+        <TableCell>
+          <DeleteStudent id={id} />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell
           style={{ paddingBottom: 0, paddingTop: 0 }}
-          colSpan={9}
+          colSpan={10}
           padding={"none"}
         >
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box>
               <Table size="small">
-                <TableHead>
+                <TableHead sx={{ backgroundColor: "#F6490D" }}>
                   <TableRow>
-                    <TableCell>Name</TableCell>
-                    <TableCell align="right">Level</TableCell>
-                    <TableCell align="right">Semester</TableCell>
-                    <TableCell align="right">Mark</TableCell>
-                    <TableCell align="right">Grade</TableCell>
-                    <TableCell align="right">GPA</TableCell>
+                    <TableCell sx={{ color: "white" }}>Name</TableCell>
+                    <TableCell align="right" sx={{ color: "white" }}>
+                      Level
+                    </TableCell>
+                    <TableCell align="right" sx={{ color: "white" }}>
+                      Semester
+                    </TableCell>
+                    <TableCell align="right" sx={{ color: "white" }}>
+                      Mark
+                    </TableCell>
+                    <TableCell align="right" sx={{ color: "white" }}>
+                      Grade
+                    </TableCell>
+                    <TableCell align="right" sx={{ color: "white" }}>
+                      Points
+                    </TableCell>
+                    <TableCell align="right" sx={{ color: "white" }}>
+                      GPA
+                    </TableCell>
+                    <TableCell align="right" sx={{ color: "white" }}>
+                      Edit
+                    </TableCell>
+                    <TableCell align="left" sx={{ color: "white" }}>
+                      Delete
+                    </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -110,24 +147,10 @@ const StRows = ({
                     })
                     .map((enroll) => {
                       return (
-                        <TableRow
+                        <EnrollmentsRows
                           key={enroll.id + enroll.mark}
-                        >
-                          <TableCell component="th" scope="row">
-                            {enroll.course.name}
-                          </TableCell>
-                          <TableCell align="right">{enroll.level}</TableCell>
-                          <TableCell align="right">
-                            {enroll.semester === 3 ? "SC" : enroll.semester}
-                          </TableCell>
-                          <TableCell align="right">
-                            {enroll.mark + "/" + enroll.full_mark}
-                          </TableCell>
-                          <TableCell align="right">{enroll.grade}</TableCell>
-                          <TableCell align="right">
-                            {enroll.gpa.toFixed(2)}
-                          </TableCell>
-                        </TableRow>
+                          {...enroll}
+                        />
                       );
                     })}
                 </TableBody>

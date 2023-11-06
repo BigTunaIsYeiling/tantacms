@@ -3,6 +3,7 @@ export default async function GetCourses(key) {
     headers: {
       Authorization: `Bearer ${key}`,
     },
+    cache: "no-store",
   });
   return response.json();
 }

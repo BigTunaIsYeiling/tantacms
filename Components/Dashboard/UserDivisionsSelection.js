@@ -37,8 +37,6 @@ export default function Scelection({ data, user, setUser }) {
           if (selected.length === 0) {
             return <p>All</p>;
           }
-
-          //   return selected.join(", ");
           return data
             .filter((divis) => selected.indexOf(divis.id) > -1)
             .map((divis) => divis.name)
