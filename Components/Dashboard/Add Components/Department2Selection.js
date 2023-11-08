@@ -23,7 +23,7 @@ export default function BasicSelectDepartMent2({ data, setdata, department }) {
         >
           <MenuItem value={null}>None</MenuItem>
           {data.map((item) => {
-            return <MenuItem value={item.id}>{item.name}</MenuItem>;
+            return <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>;
           })}
         </Select>
       </FormControl>

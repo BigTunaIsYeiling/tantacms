@@ -23,7 +23,7 @@ export default function BasicSelect({ data, setdata, division }) {
           onChange={handleChange}
         >
           {data.map((item) => {
-            return <MenuItem value={item.id}>{item.name}</MenuItem>;
+            return <MenuItem value={item.id} key={item.id}>{item.name}</MenuItem>;
           })}
         </Select>
       </FormControl>

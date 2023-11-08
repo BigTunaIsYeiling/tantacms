@@ -15,7 +15,7 @@ export default async function page() {
   ]);
   return (
     <StudentsView
-      students={students.results}
+      students={students}
       admin={data.user.is_admin}
       groups={groups}
       divisions={divisions}

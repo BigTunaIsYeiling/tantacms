@@ -23,7 +23,7 @@ export default function BasicSelectGroup({ data, setdata, group }) {
           onChange={handleChange}
         >
           {data.map((item) => {
-            return <MenuItem value={item.id}>{item.name}</MenuItem>;
+            return <MenuItem key={item.id} value={item.id}>{item.name}</MenuItem>;
           })}
         </Select>
       </FormControl>
