@@ -5,7 +5,15 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { RiCloseLine, RiFileEditFill } from "react-icons/ri";
-export const EditEnrollment = ({ id, points, grade, mark, fullMark }) => {
+export const EditEnrollment = ({
+  id,
+  points,
+  grade,
+  mark,
+  fullMark,
+  StudentId,
+  revalidate,
+}) => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -13,17 +21,17 @@ export const EditEnrollment = ({ id, points, grade, mark, fullMark }) => {
   const handleClose = () => {
     setOpen(false);
   };
-  const [data, setData] = useState({
+  const [Data, setData] = useState({
     points,
     grade,
     mark,
   });
   const handleInput = (e) => {
-    setData({ ...data, [e.target.name]: e.target.value });
+    setData({ ...Data, [e.target.name]: e.target.value });
   };
   const router = useRouter();
   const handleUpdate = async () => {
-    if (Number(data.mark) > fullMark) {
+    if (Number(Data.mark) > fullMark) {
       return toast.error("Mark cannot be greater than full mark");
     }
     await fetch(`http://127.0.0.1:8000/enrollments/${id}/`, {
@@ -33,12 +41,12 @@ export const EditEnrollment = ({ id, points, grade, mark, fullMark }) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("key")}`,
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(Data),
     }).then((res) => {
       if (res.ok) {
         handleClose();
         toast.success("Enrollment Updated successfully");
-        return router.refresh();
+        return revalidate();
       } else {
         return res.json();
       }

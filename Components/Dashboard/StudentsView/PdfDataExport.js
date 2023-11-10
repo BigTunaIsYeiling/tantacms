@@ -21,21 +21,27 @@ function PDFdataExport() {
 
   return (
     <Box
-      sx={{
-        alignSelf: "flex-end",
-        fontWeight: "400",
-        textTransform: "none",
-        color: "white",
-        backgroundColor: "#fb5c25",
-        padding: "0.5rem 1rem",
-      }}
       component={PDFDownloadLink}
       document={<MyPDFDocument data={dataArray} />}
       fileName="myDocument.pdf"
+      alignSelf={"flex-end"}
     >
-      {({ blob, url, loading, error }) =>
-        loading ? "Loading document..." : "Download now!"
-      }
+      {({ blob, url, loading, error }) => (
+        <Button
+          sx={{
+            alignSelf: "flex-end",
+            fontWeight: "500",
+            textTransform: "none",
+            color: "white",
+            backgroundColor: "#fb5c25",
+            ":hover": {
+              backgroundColor: "#fb5c25",
+            },
+          }}
+        >
+          {loading ? "Loading document..." : "Download now!"}
+        </Button>
+      )}
     </Box>
   );
 }

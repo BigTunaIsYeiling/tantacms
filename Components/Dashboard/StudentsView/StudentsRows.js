@@ -14,6 +14,7 @@ import { BiDownArrowAlt, BiUpArrowAlt } from "react-icons/bi";
 import { EnrollmentsRows } from "./Enrollments";
 import { EditStudent } from "../Edit Components/EditStudent";
 import { DeleteStudent } from "../Delete Components/DeleteStudent";
+import { EnrollmentBody } from "./EnrollmentBody";
 const StRows = ({
   id,
   name,
@@ -21,7 +22,6 @@ const StRows = ({
   passed_hours,
   gpa,
   level,
-  enrollments,
   group,
   mark,
   groups,
@@ -109,53 +109,7 @@ const StRows = ({
           padding={"none"}
         >
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <Box>
-              <Table size="small">
-                <TableHead sx={{ backgroundColor: "#F6490D" }}>
-                  <TableRow>
-                    <TableCell sx={{ color: "white" }}>Name</TableCell>
-                    <TableCell align="right" sx={{ color: "white" }}>
-                      Level
-                    </TableCell>
-                    <TableCell align="right" sx={{ color: "white" }}>
-                      Semester
-                    </TableCell>
-                    <TableCell align="right" sx={{ color: "white" }}>
-                      Mark
-                    </TableCell>
-                    <TableCell align="right" sx={{ color: "white" }}>
-                      Grade
-                    </TableCell>
-                    <TableCell align="right" sx={{ color: "white" }}>
-                      Points
-                    </TableCell>
-                    <TableCell align="right" sx={{ color: "white" }}>
-                      GPA
-                    </TableCell>
-                    <TableCell align="right" sx={{ color: "white" }}>
-                      Edit
-                    </TableCell>
-                    <TableCell align="left" sx={{ color: "white" }}>
-                      Delete
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {enrollments
-                    .sort((a, b) => {
-                      return a.level - b.level;
-                    })
-                    .map((enroll) => {
-                      return (
-                        <EnrollmentsRows
-                          key={enroll.id + enroll.mark}
-                          {...enroll}
-                        />
-                      );
-                    })}
-                </TableBody>
-              </Table>
-            </Box>
+            <EnrollmentBody id={id} />
           </Collapse>
         </TableCell>
       </TableRow>

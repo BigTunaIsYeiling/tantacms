@@ -2,6 +2,7 @@ import ReduxProvider from "@/Lib/Provider";
 import "./globals.css";
 import { Inter } from "next/font/google";
 import { Toaster } from "react-hot-toast";
+import { SWRProvider } from "@/Lib/SWRProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 

@@ -194,7 +194,6 @@ const STableComponent = ({ students, divisions, groups }) => {
                 gpa={row.gpa}
                 passed_hours={row.passed_hours}
                 name={row.name}
-                enrollments={row.enrollments}
                 mark={row.total_mark}
                 groups={groups}
                 divisions={divisions}

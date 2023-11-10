@@ -171,7 +171,7 @@ export const StudentsFilters = ({ data }) => {
             </FormControl>
           </Stack>
           <ExportData data={data} />
-          {/* <PDFdataExport /> */}
+          <PDFdataExport />
         </Stack>
       </Drawer>
     </Box>

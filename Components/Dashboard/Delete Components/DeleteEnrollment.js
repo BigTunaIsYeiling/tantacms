@@ -15,7 +15,7 @@ import toast from "react-hot-toast";
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
-export const DeleteEnrollment = ({ id }) => {
+export const DeleteEnrollment = ({ id, revalidate }) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -38,7 +38,7 @@ export const DeleteEnrollment = ({ id }) => {
       if (res.ok) {
         handleClose();
         toast.success("Enrollment Deleted Successfully");
-        return router.refresh();
+        return revalidate();
       } else {
         return res.json();
       }
