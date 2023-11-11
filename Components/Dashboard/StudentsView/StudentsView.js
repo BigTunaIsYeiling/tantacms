@@ -4,10 +4,11 @@ import { CgMenu } from "react-icons/cg";
 import STableComponent from "./StudentsTable";
 import { StudentsFilters } from "./StudentsFilter";
 import UploadCSV from "../UploadCsv";
+import { NewStudentsTable } from "@/Components/newTable";
 const StudentsView = ({ students, admin, divisions, groups }) => {
   return (
     <Box height={{ xs: "calc(100vh - 120px)", sm: "calc(100vh - 64px)" }}>
-      <Stack direction={"column"} width="100%" maxHeight={"100%"}>
+      <Stack direction={"column"} width="100%" height={"100%"}>
         <Stack
           paddingX={"0.5rem"}
           paddingY={"1rem"}
@@ -35,7 +36,12 @@ const StudentsView = ({ students, admin, divisions, groups }) => {
             <StudentsFilters data={students} />
           </Stack>
         </Stack>
-        <STableComponent
+        {/* <STableComponent
+          students={students}
+          divisions={divisions}
+          groups={groups}
+        /> */}
+        <NewStudentsTable
           students={students}
           divisions={divisions}
           groups={groups}
