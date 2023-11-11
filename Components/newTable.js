@@ -25,8 +25,65 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
   };
   const [studentsLength, setStudentsLenght] = React.useState(students.length);
   React.useEffect(() => {
-    setStudentsLenght(students.length);
-  }, [students]);
+    const length = students
+      .filter((row) => row.name.toLowerCase().includes(filtersOption.name))
+      .filter((row) =>
+        filtersOption.level !== ""
+          ? row.level === Number(filtersOption.level)
+          : true
+      )
+      .filter((stu) => {
+        if (filtersOption.division.length === 0) return true;
+        if (
+          filtersOption.division.includes(
+            stu.division ? stu.division.name : stu.group.name
+          )
+        )
+          return true;
+        return false;
+      })
+      .sort((a, b) => {
+        return (
+          SortType === "id" && (OrderType === "asc" ? a.id - b.id : b.id - a.id)
+        );
+      })
+
+      .sort((a, b) => {
+        return (
+          SortType === "mark" &&
+          (OrderType === "asc"
+            ? a.total_mark - b.total_mark
+            : b.total_mark - a.total_mark)
+        );
+      })
+      .sort((a, b) => {
+        return (
+          SortType === "az" &&
+          (OrderType === "asc"
+            ? a.name.localeCompare(b.name, ["ar"])
+            : b.name.localeCompare(a.name, ["ar"]))
+        );
+      })
+      .sort((a, b) => {
+        return (
+          SortType === "hours" &&
+          (OrderType === "asc"
+            ? a.passed_hours - b.passed_hours
+            : b.passed_hours - a.passed_hours)
+        );
+      })
+      .sort((a, b) => {
+        return (
+          SortType === "gpa" &&
+          (OrderType === "asc" ? a.gpa - b.gpa : b.gpa - a.gpa)
+        );
+      })
+      .filter((row, index) => {
+        if (filtersOption.limit === "") return true;
+        return index < Number(filtersOption.limit);
+      }).length;
+    setStudentsLenght(length);
+  }, [filtersOption]);
   return (
     <Paper
       sx={{
@@ -198,10 +255,14 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
                 if (filtersOption.limit === "") return true;
                 return index < Number(filtersOption.limit);
               })
-              // .filter((row, index) => {
-              //   return index < 8;
-              // })
-              .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              .filter((row, index) => {
+                if (filtersOption.limit === "")
+                  return (
+                    index >= page * rowsPerPage &&
+                    index < page * rowsPerPage + rowsPerPage
+                  );
+                return row;
+              })
               .map((row) => (
                 <StRows
                   key={row.name}
@@ -223,7 +284,7 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
       <TablePagination
         rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
-        count={students.length}
+        count={studentsLength}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

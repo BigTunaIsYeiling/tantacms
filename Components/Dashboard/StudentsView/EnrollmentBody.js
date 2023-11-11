@@ -35,11 +35,6 @@ export const EnrollmentBody = ({ id }) => {
         <Skeleton height={40} />
         <Skeleton height={40} />
         <Skeleton height={40} />
-        <Skeleton height={40} />
-        <Skeleton height={40} />
-        <Skeleton height={40} />
-        <Skeleton height={40} />
-        <Skeleton height={40} />
       </>
     );
   }
