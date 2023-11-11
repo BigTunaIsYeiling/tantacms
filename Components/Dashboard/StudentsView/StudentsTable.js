@@ -184,6 +184,9 @@ const STableComponent = ({ students, divisions, groups }) => {
               if (filtersOption.limit === "") return true;
               return index < Number(filtersOption.limit);
             })
+            .filter((row, index) => {
+              return index < 8;
+            })
             .map((row) => (
               <StRows
                 key={row.name}

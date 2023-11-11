@@ -11,10 +11,10 @@ export const EnrollmentRows = ({
   grade,
   points,
   StudentId,
-  revalidate
+  revalidate,
 }) => {
   return (
-    <TableRow>
+    <>
       <TableCell component="th" scope="row">
         {course.name}
       </TableCell>
@@ -37,6 +37,6 @@ export const EnrollmentRows = ({
       <TableCell align="left">
         <DeleteEnrollment id={id} revalidate={revalidate} />
       </TableCell>
-    </TableRow>
+    </>
   );
 };
