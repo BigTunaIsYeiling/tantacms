@@ -1,5 +1,5 @@
 "use client";
-import { Box, Button, Dialog, Stack } from "@mui/material";
+import { Box, Button, Checkbox, Dialog, FormControlLabel, Stack } from "@mui/material";
 import { useState } from "react";
 import exportFromJSON from "export-from-json";
 import { Filters, order, sort } from "@/Lib/FiltersSlices/CoursesSlice";
@@ -16,6 +16,16 @@ export default function ExportData({ data }) {
   const SortType = useSelector(sort);
   const OrderType = useSelector(order);
   const filtersOption = useSelector(Filters);
+  const [ExportedFields, SetExported] = useState({
+    name: true,
+    code: true,
+    level: true,
+    semester: true,
+    credit_hours: true,
+  });
+  const handleClick = (e) => {
+    SetExported({ ...ExportedFields, [e.target.name]: e.target.checked });
+  };
   return (
     <>
       <Button
@@ -45,10 +55,11 @@ export default function ExportData({ data }) {
             fontWeight={600}
             whiteSpace="nowrap"
             alignSelf={"center"}
+            marginBottom={2}
+            marginTop={3}
           >
             Export Data
           </Box>
-
           <Box
             component={"input"}
             autoCorrect={"false"}
@@ -69,6 +80,36 @@ export default function ExportData({ data }) {
             placeholder={"File Name"}
             value={filename}
             onChange={(e) => setfileName(e.target.value)}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.name} />}
+            label="Name"
+            name="name"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.code} />}
+            label="Code"
+            name="code"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.level} />}
+            label="Level"
+            name="level"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.semester} />}
+            label="Semester"
+            name="semester"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.credit_hours} />}
+            label="Credit hours"
+            name="credit_hours"
+            onChange={handleClick}
           />
           <Button
             sx={{
@@ -136,13 +177,23 @@ export default function ExportData({ data }) {
                         ? a.level - b.level
                         : b.level - a.level)
                     );
+                  })
+                  .map((row) => {
+                    let newRow = {};
+                    if (ExportedFields.name) newRow.name = row.name;
+                    if (ExportedFields.code) newRow.code = row.code;
+                    if (ExportedFields.level) newRow.level = row.level;
+                    if (ExportedFields.semester) newRow.semester = row.semester;
+                    if (ExportedFields.credit_hours)
+                      newRow.credit_hours = row.credit_hours;
+                    return newRow;
                   }),
                 fileName: filename,
                 exportType: exportFromJSON.types.csv,
               });
             }}
           >
-            Submit
+            Export
           </Button>
         </Stack>
       </Dialog>

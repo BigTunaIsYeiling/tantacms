@@ -35,6 +35,11 @@ const CoursesSlice = createSlice({
     Filtersemester: (state, action) => {
       state.Filters.semester = action.payload;
     },
+    ResetFilters: (state) => {
+      state.Filters = initialState.Filters;
+      state.sort = initialState.sort;
+      state.order = initialState.order;
+    },
   },
 });
 export const CoursesReducer = CoursesSlice.reducer;
@@ -46,6 +51,7 @@ export const {
   Filtersemester,
   FilterCode,
   Filterlevel,
+  ResetFilters,
 } = CoursesSlice.actions;
 // export const division = (state) => state.DivisonReducer.Filters.division;
 export const sort = (state) => state.CoursesReducer.sort;

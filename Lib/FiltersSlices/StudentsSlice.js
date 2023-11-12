@@ -31,6 +31,11 @@ const StudentsSlice = createSlice({
     SetLimit: (state, action) => {
       state.Filters.limit = action.payload;
     },
+    ResetFiltersStu: (state) => {
+      state.Filters = initialState.Filters;
+      state.sort = initialState.sort;
+      state.order = initialState.order;
+    },
   },
 });
 export const StudentsReducer = StudentsSlice.reducer;
@@ -41,6 +46,7 @@ export const {
   Filterlevel,
   FilterDivision,
   SetLimit,
+  ResetFiltersStu,
 } = StudentsSlice.actions;
 export const sort = (state) => state.StudentsReducer.sort;
 export const order = (state) => state.StudentsReducer.order;

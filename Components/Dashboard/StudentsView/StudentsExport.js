@@ -1,5 +1,12 @@
 "use client";
-import { Box, Button, Dialog, Stack } from "@mui/material";
+import {
+  Box,
+  Button,
+  Checkbox,
+  Dialog,
+  FormControlLabel,
+  Stack,
+} from "@mui/material";
 import { useState } from "react";
 import exportFromJSON from "export-from-json";
 import { useSelector } from "react-redux";
@@ -16,6 +23,17 @@ export default function ExportData({ data }) {
   const SortType = useSelector(sort);
   const OrderType = useSelector(order);
   const filtersOption = useSelector(Filters);
+  const [ExportedFields, SetExported] = useState({
+    name: true,
+    division: true,
+    level: true,
+    passed_hours: true,
+    gpa: true,
+    total_mark: true,
+  });
+  const handleClick = (e) => {
+    SetExported({ ...ExportedFields, [e.target.name]: e.target.checked });
+  };
   return (
     <>
       <Button
@@ -45,10 +63,11 @@ export default function ExportData({ data }) {
             fontWeight={600}
             whiteSpace="nowrap"
             alignSelf={"center"}
+            marginBottom={2}
+            marginTop={3}
           >
             Export Data
           </Box>
-
           <Box
             component={"input"}
             autoCorrect={"false"}
@@ -69,6 +88,42 @@ export default function ExportData({ data }) {
             placeholder={"File Name"}
             value={filename}
             onChange={(e) => setfileName(e.target.value)}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.name} />}
+            label="Name"
+            name="name"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.division} />}
+            label="Division"
+            name="division"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.level} />}
+            label="Level"
+            name="level"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.passed_hours} />}
+            label="Passed hours"
+            name="passed_hours"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.gpa} />}
+            label="GPA"
+            name="gpa"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.total_mark} />}
+            label="Total mark"
+            name="total_mark"
+            onChange={handleClick}
           />
           <Button
             sx={{
@@ -146,24 +201,28 @@ export default function ExportData({ data }) {
                     if (filtersOption.limit === "") return true;
                     return index < Number(filtersOption.limit);
                   })
-                  //remove the id and name from the data
+                  //remove the unchecked fields
                   .map((row) => {
-                    const {
-                      id,
-                      group,
-                      division,
-                      passed_hours,
-                      enrollments,
-                      ...rest
-                    } = row;
-                    return rest;
+                    let newRow = {};
+                    if (ExportedFields.name) newRow.name = row.name;
+                    if (ExportedFields.level) newRow.level = row.level;
+                    if (ExportedFields.division)
+                      newRow.division = row.division
+                        ? row.division.name
+                        : row.group.name;
+                    if (ExportedFields.passed_hours)
+                      newRow.passed_hours = row.passed_hours;
+                    if (ExportedFields.gpa) newRow.gpa = row.gpa;
+                    if (ExportedFields.total_mark)
+                      newRow.total_mark = row.total_mark;
+                    return newRow;
                   }),
                 fileName: filename,
                 exportType: exportFromJSON.types.csv,
               });
             }}
           >
-            Submit
+            Export
           </Button>
         </Stack>
       </Dialog>

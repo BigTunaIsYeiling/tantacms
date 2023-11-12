@@ -23,6 +23,8 @@ import Link from "next/link";
 import Cookies from "js-cookie";
 import { AddUser } from "./AddUser";
 import { UsersList } from "./UsersLists";
+import { ResetFilters } from "@/Lib/FiltersSlices/CoursesSlice";
+import { ResetFiltersStu } from "@/Lib/FiltersSlices/StudentsSlice";
 const NavigationBar = ({ admin, data, user, accounts }) => {
   const pathname = usePathname();
   const navi = useRef();
@@ -57,7 +59,9 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
         Cookies.remove("accessToken");
       })
       .finally(() => {
-        router.push("/");
+        dispatch(ResetFilters());
+        dispatch(ResetFiltersStu());
+        return router.push("/");
       });
   };
   return (
