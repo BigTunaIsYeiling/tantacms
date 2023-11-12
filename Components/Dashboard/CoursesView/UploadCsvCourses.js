@@ -23,26 +23,27 @@ const UploadCSV = () => {
     setOpen(false);
   };
   const router = useRouter();
-  const UploadFileAction = async () => {
+  const UploadFileAction = () => {
     const formData = new FormData();
     formData.append("file", file);
-    await fetch("http://127.0.0.1:8000/data/upload_courses/", {
+    const toastId = toast.loading("Uploading.....", {
+      position: "top-center",
+    });
+    fetch("http://127.0.0.1:8000/data/upload_courses/", {
       method: "POST",
       body: formData,
       headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
         Authorization: `Bearer ${Cookies.get("key")}`,
       },
     }).then((res) => {
       if (res.ok) {
+        toast.dismiss(toastId);
+        toast.success("UpLoaded Succesfully", {
+          position: "top-center",
+        });
         router.refresh();
-        toast.success("Added Succesfully");
         setFile(null);
         return handleClose();
-      } else {
-        const data = res.json();
-        toast.error(data);
       }
     });
   };
@@ -159,6 +160,7 @@ const UploadCSV = () => {
                     },
                   }}
                   startIcon={<MdDone />}
+                  onClick={UploadFileAction}
                 >
                   Accept
                 </Button>

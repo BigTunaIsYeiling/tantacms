@@ -3,8 +3,8 @@ import { Box, Stack } from "@mui/material";
 import { CgMenu } from "react-icons/cg";
 // import STableComponent from "./StudentsTable";
 import { StudentsFilters } from "./StudentsFilter";
-import UploadCSV from "../UploadCsv";
 import { NewStudentsTable } from "@/Components/newTable";
+import UploadCSV from "./UploadCsvStudents";
 const StudentsView = ({ students, admin, divisions, groups }) => {
   return (
     <Box height={{ xs: "calc(100vh - 120px)", sm: "calc(100vh - 64px)" }}>
