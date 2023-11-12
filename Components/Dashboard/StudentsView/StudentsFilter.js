@@ -25,7 +25,6 @@ import {
 } from "@/Lib/FiltersSlices/StudentsSlice";
 import Scelection from "./StudentsSelection";
 import ExportData from "./StudentsExport";
-import PDFdataExport from "./PdfDataExport";
 export const StudentsFilters = ({ data }) => {
   const [open, setOpen] = useState(false);
   const handleClick = () => {
@@ -144,7 +143,11 @@ export const StudentsFilters = ({ data }) => {
                   label="Hours"
                 />
                 <FormControlLabel value="gpa" control={<Radio />} label="GPA" />
-                <FormControlLabel value="mark" control={<Radio />} label="Total Mark" />
+                <FormControlLabel
+                  value="mark"
+                  control={<Radio />}
+                  label="Total Mark"
+                />
               </RadioGroup>
             </FormControl>
           </Stack>
@@ -171,7 +174,6 @@ export const StudentsFilters = ({ data }) => {
             </FormControl>
           </Stack>
           <ExportData data={data} />
-          <PDFdataExport />
         </Stack>
       </Drawer>
     </Box>
