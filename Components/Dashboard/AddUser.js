@@ -290,13 +290,9 @@ export const AddUser = ({ admin, data }) => {
             }}
             marginTop="2rem"
             onClick={AddUserMethod}
-            // onClick={() => {
-            //   console.log(user);
-            // }}
           >
             Submit
           </Box>
-
           <IconButton
             onClick={handleClose}
             sx={{ position: "absolute", top: "1%", left: "1%" }}
