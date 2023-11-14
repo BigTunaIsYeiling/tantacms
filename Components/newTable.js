@@ -263,7 +263,7 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
                   );
                 return row;
               })
-              .map((row) => (
+              .map((row, index) => (
                 <StRows
                   key={row.name}
                   id={row.id}
@@ -276,6 +276,7 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
                   mark={row.total_mark}
                   groups={groups}
                   divisions={divisions}
+                  index={index}
                 />
               ))}
           </TableBody>

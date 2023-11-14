@@ -182,7 +182,7 @@ export const GraduatesTable = ({ students }) => {
                   index < page * rowsPerPage + rowsPerPage
                 );
               })
-              .map((row) => (
+              .map((row,index) => (
                 <GraduateRow
                   key={row.name}
                   id={row.id}
@@ -193,6 +193,7 @@ export const GraduatesTable = ({ students }) => {
                   passed_hours={row.passed_hours}
                   name={row.name}
                   mark={row.total_mark}
+                  index={index}
                 />
               ))}
           </TableBody>

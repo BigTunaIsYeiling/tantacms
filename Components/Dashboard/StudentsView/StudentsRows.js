@@ -26,6 +26,7 @@ const StRows = ({
   mark,
   groups,
   divisions,
+  index,
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -35,7 +36,7 @@ const StRows = ({
           component="th"
           //   sx={{ display: HideidColumn ? "none" : "table-cell" }}
         >
-          {id}
+          {index + 1}
         </TableCell>
         <TableCell>
           <IconButton

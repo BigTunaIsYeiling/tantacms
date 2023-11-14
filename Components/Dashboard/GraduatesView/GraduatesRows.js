@@ -12,6 +12,7 @@ export const GraduateRow = ({
   level,
   group,
   mark,
+  index,
 }) => {
   const [open, setOpen] = useState(false);
   return (
@@ -21,7 +22,7 @@ export const GraduateRow = ({
           component="th"
           //   sx={{ display: HideidColumn ? "none" : "table-cell" }}
         >
-          {id}
+          {index + 1}
         </TableCell>
         <TableCell>
           <IconButton
