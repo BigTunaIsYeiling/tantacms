@@ -21,7 +21,7 @@ export const EnrollmentRows = ({
       <TableCell align="right">{level}</TableCell>
       <TableCell align="right">{semester === 3 ? "SC" : semester}</TableCell>
       <TableCell align="right">{mark + "/" + full_mark}</TableCell>
-      <TableCell align="right">{grade}</TableCell>
+      <TableCell align="right">{grade.toFixed(4)}</TableCell>
       <TableCell align="right">{points}</TableCell>
       <TableCell align="right">
         <EditEnrollment
