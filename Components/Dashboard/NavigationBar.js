@@ -25,6 +25,7 @@ import { AddUser } from "./AddUser";
 import { UsersList } from "./UsersLists";
 import { ResetFilters } from "@/Lib/FiltersSlices/CoursesSlice";
 import { ResetFiltersStu } from "@/Lib/FiltersSlices/StudentsSlice";
+import { PiGraduationCapFill } from "react-icons/pi";
 const NavigationBar = ({ admin, data, user, accounts }) => {
   const pathname = usePathname();
   const navi = useRef();
@@ -38,6 +39,10 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
     {
       text: "Students",
       path: "/Dashboard/Students",
+    },
+    {
+      text: "Graduates",
+      path: "/Dashboard/Graduates",
     },
     {
       text: "Courses",
@@ -108,6 +113,14 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                   />
                 )}
                 {i === 2 && (
+                  <PiGraduationCapFill
+                    color={
+                      pathname === "/Dashboard/Graduates" ? "#F6490D" : "#777"
+                    }
+                    size={"22px"}
+                  />
+                )}
+                {i === 3 && (
                   <SiCoursera
                     color={
                       pathname === "/Dashboard/Courses" ? "#F6490D" : "#777"
