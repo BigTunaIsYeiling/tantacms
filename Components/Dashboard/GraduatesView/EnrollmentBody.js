@@ -38,6 +38,7 @@ export const EnrollmentBody = ({ id }) => {
       </>
     );
   }
+  console.log(data);
   return (
     <Box>
       <Table size="small">
@@ -60,10 +61,7 @@ export const EnrollmentBody = ({ id }) => {
               Points
             </TableCell>
             <TableCell align="right" sx={{ color: "white" }}>
-              Edit
-            </TableCell>
-            <TableCell align="left" sx={{ color: "white" }}>
-              Delete
+              Month
             </TableCell>
           </TableRow>
         </TableHead>
