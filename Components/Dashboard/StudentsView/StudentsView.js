@@ -1,9 +1,8 @@
 "use client";
 import { Box, Stack } from "@mui/material";
 import { CgMenu } from "react-icons/cg";
-// import STableComponent from "./StudentsTable";
 import { StudentsFilters } from "./StudentsFilter";
-import { NewStudentsTable } from "@/Components/newTable";
+import { NewStudentsTable } from "@/Components/Dashboard/StudentsView/StudentsTable";
 import UploadCSV from "./UploadCsvStudents";
 const StudentsView = ({ students, admin, divisions, groups }) => {
   return (

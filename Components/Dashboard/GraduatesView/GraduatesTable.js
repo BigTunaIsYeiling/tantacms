@@ -8,10 +8,12 @@ import TableHead from "@mui/material/TableHead";
 import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { GraduateRow } from "./GraduatesRows";
+import { useSelector } from "react-redux";
+import { Filters, order, sort } from "@/Lib/FiltersSlices/GraduatesSlice";
 export const GraduatesTable = ({ students }) => {
-  // const SortType = useSelector(sort);
-  // const OrderType = useSelector(order);
-  // const filtersOption = useSelector(Filters);
+  const SortType = useSelector(sort);
+  const OrderType = useSelector(order);
+  const filtersOption = useSelector(Filters);
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const handleChangePage = (event, newPage) => {
@@ -21,67 +23,53 @@ export const GraduatesTable = ({ students }) => {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-  // const [studentsLength, setStudentsLenght] = React.useState(students.length);
-  // React.useEffect(() => {
-  //   const length = students
-  //     .filter((row) => row.name.toLowerCase().includes(filtersOption.name))
-  //     .filter((row) =>
-  //       filtersOption.level !== ""
-  //         ? row.level === Number(filtersOption.level)
-  //         : true
-  //     )
-  //     .filter((stu) => {
-  //       if (filtersOption.division.length === 0) return true;
-  //       if (
-  //         filtersOption.division.includes(
-  //           stu.division ? stu.division.name : stu.group.name
-  //         )
-  //       )
-  //         return true;
-  //       return false;
-  //     })
-  //     .sort((a, b) => {
-  //       return (
-  //         SortType === "id" && (OrderType === "asc" ? a.id - b.id : b.id - a.id)
-  //       );
-  //     })
-
-  //     .sort((a, b) => {
-  //       return (
-  //         SortType === "mark" &&
-  //         (OrderType === "asc"
-  //           ? a.total_mark - b.total_mark
-  //           : b.total_mark - a.total_mark)
-  //       );
-  //     })
-  //     .sort((a, b) => {
-  //       return (
-  //         SortType === "az" &&
-  //         (OrderType === "asc"
-  //           ? a.name.localeCompare(b.name, ["ar"])
-  //           : b.name.localeCompare(a.name, ["ar"]))
-  //       );
-  //     })
-  //     .sort((a, b) => {
-  //       return (
-  //         SortType === "hours" &&
-  //         (OrderType === "asc"
-  //           ? a.passed_hours - b.passed_hours
-  //           : b.passed_hours - a.passed_hours)
-  //       );
-  //     })
-  //     .sort((a, b) => {
-  //       return (
-  //         SortType === "gpa" &&
-  //         (OrderType === "asc" ? a.gpa - b.gpa : b.gpa - a.gpa)
-  //       );
-  //     })
-  //     .filter((row, index) => {
-  //       if (filtersOption.limit === "") return true;
-  //       return index < Number(filtersOption.limit);
-  //     }).length;
-  //   setStudentsLenght(length);
-  // }, [filtersOption]);
+  const [studentsLength, setStudentsLenght] = React.useState(students.length);
+  React.useEffect(() => {
+    const length = students
+      .filter((row) => row.name.toLowerCase().includes(filtersOption.name))
+      .filter((row) =>
+        filtersOption.year.length < 4 ? row : row.year == filtersOption.year
+      )
+      .filter((stu) => {
+        if (filtersOption.division.length === 0) return true;
+        if (
+          filtersOption.division.includes(
+            stu.division ? stu.division.name : stu.group.name
+          )
+        )
+          return true;
+        return false;
+      })
+      .filter((stu) => {
+        if (filtersOption.month.length === 0) return true;
+        if (filtersOption.month.includes(stu.semester.toString())) return true;
+        return false;
+      })
+      .sort((a, b) => {
+        return (
+          SortType === "id" && (OrderType === "asc" ? a.id - b.id : b.id - a.id)
+        );
+      })
+      .sort((a, b) => {
+        return (
+          SortType === "mark" &&
+          (OrderType === "asc"
+            ? a.total_mark - b.total_mark
+            : b.total_mark - a.total_mark)
+        );
+      })
+      .sort((a, b) => {
+        return (
+          SortType === "gpa" &&
+          (OrderType === "asc" ? a.gpa - b.gpa : b.gpa - a.gpa)
+        );
+      })
+      .filter((row, index) => {
+        if (filtersOption.limit === "") return true;
+        return index < Number(filtersOption.limit);
+      }).length;
+    setStudentsLenght(length);
+  }, [filtersOption]);
   return (
     <Paper
       sx={{
@@ -91,17 +79,9 @@ export const GraduatesTable = ({ students }) => {
         flexGrow: 1,
       }}
     >
-      <TableContainer sx={{ maxHeight: 560 }}>
+      <TableContainer sx={{ maxHeight: { xs: 495, sm: 560 } }}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead
-          // sx={{
-          //   backgroundColor: "#f9f9f9",
-          //   position: "sticky",
-          //   top: 0,
-          //   zIndex: 1,
-          // }}
-          // className="StableHead"
-          >
+          <TableHead>
             <TableRow>
               <TableCell
                 sx={{
@@ -136,16 +116,7 @@ export const GraduatesTable = ({ students }) => {
               >
                 Divison
               </TableCell>
-              <TableCell
-                align="left"
-                sx={{
-                  whiteSpace: "nowrap",
-                  // display: HideLevelColumn ? "none" : "table-cell",
-                }}
-              >
-                Level
-              </TableCell>
-              <TableCell
+              {/* <TableCell
                 align="left"
                 sx={{
                   whiteSpace: "nowrap",
@@ -153,7 +124,7 @@ export const GraduatesTable = ({ students }) => {
                 }}
               >
                 Passed Hours
-              </TableCell>
+              </TableCell> */}
               <TableCell
                 align="left"
                 sx={{
@@ -172,15 +143,83 @@ export const GraduatesTable = ({ students }) => {
               >
                 Total Mark
               </TableCell>
+              <TableCell
+                align="left"
+                sx={{
+                  whiteSpace: "nowrap",
+                  // display: HideGpaColumn ? "none" : "table-cell",
+                }}
+              >
+                Month
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={{
+                  whiteSpace: "nowrap",
+                  // display: HideGpaColumn ? "none" : "table-cell",
+                }}
+              >
+                Year
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody sx={{ position: "relative" }}>
             {students
-              .filter((row, index) => {
+              .filter((row) =>
+                row.name.toLowerCase().includes(filtersOption.name)
+              )
+              .filter((row) =>
+                filtersOption.year.length < 4
+                  ? row
+                  : row.year == filtersOption.year
+              )
+              .filter((stu) => {
+                if (filtersOption.division.length === 0) return true;
+                if (
+                  filtersOption.division.includes(
+                    stu.division ? stu.division.name : stu.group.name
+                  )
+                )
+                  return true;
+                return false;
+              })
+              .filter((stu) => {
+                if (filtersOption.month.length === 0) return true;
+                if (filtersOption.month.includes(stu.semester.toString()))
+                  return true;
+                return false;
+              })
+              .sort((a, b) => {
                 return (
-                  index >= page * rowsPerPage &&
-                  index < page * rowsPerPage + rowsPerPage
+                  SortType === "id" &&
+                  (OrderType === "asc" ? a.id - b.id : b.id - a.id)
                 );
+              })
+              .sort((a, b) => {
+                return (
+                  SortType === "mark" &&
+                  (OrderType === "asc"
+                    ? a.total_mark - b.total_mark
+                    : b.total_mark - a.total_mark)
+                );
+              })
+              .sort((a, b) => {
+                return (
+                  SortType === "gpa" &&
+                  (OrderType === "asc" ? a.gpa - b.gpa : b.gpa - a.gpa)
+                );
+              })
+              .filter((row, index) => {
+                if (filtersOption.limit === "") return true;
+                return index < Number(filtersOption.limit);
+              })
+              .filter((row, index) => {
+                if (filtersOption.limit === "")
+                  return (
+                    index >= page * rowsPerPage &&
+                    index < page * rowsPerPage + rowsPerPage
+                  );
+                return row;
               })
               .map((row, index) => (
                 <GraduateRow
@@ -194,6 +233,8 @@ export const GraduatesTable = ({ students }) => {
                   name={row.name}
                   mark={row.total_mark}
                   index={index}
+                  year={row.year}
+                  semester={row.semester}
                 />
               ))}
           </TableBody>
@@ -202,7 +243,7 @@ export const GraduatesTable = ({ students }) => {
       <TablePagination
         rowsPerPageOptions={[10, 25, 50, 100]}
         component="div"
-        count={students.length}
+        count={studentsLength}
         rowsPerPage={rowsPerPage}
         page={page}
         onPageChange={handleChangePage}

@@ -54,11 +54,19 @@ const DivisionsTable = ({ divisions }) => {
             >
               Hours
             </TableCell>
+            <TableCell
+              align="left"
+              sx={{
+                whiteSpace: "nowrap",
+              }}
+            >
+              Condition
+            </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {divisions.map((row) => (
-            <DivisionsRows key={row.name} {...row} />
+            <DivisionsRows key={row.name} {...row} special={row.private} />
           ))}
         </TableBody>
       </Table>

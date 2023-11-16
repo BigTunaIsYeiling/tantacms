@@ -26,6 +26,7 @@ import { UsersList } from "./UsersLists";
 import { ResetFilters } from "@/Lib/FiltersSlices/CoursesSlice";
 import { ResetFiltersStu } from "@/Lib/FiltersSlices/StudentsSlice";
 import { PiGraduationCapFill } from "react-icons/pi";
+import { ResetFiltersgrad } from "@/Lib/FiltersSlices/GraduatesSlice";
 const NavigationBar = ({ admin, data, user, accounts }) => {
   const pathname = usePathname();
   const navi = useRef();
@@ -66,6 +67,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
       .finally(() => {
         dispatch(ResetFilters());
         dispatch(ResetFiltersStu());
+        dispatch(ResetFiltersgrad());
         return router.push("/");
       });
   };

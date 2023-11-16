@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { Paper } from "@mui/material";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { PiGraduationCapFill } from "react-icons/pi";
 const BottomNavBar = () => {
   const [value, setValue] = useState("");
   const pathname = usePathname();
@@ -23,6 +24,10 @@ const BottomNavBar = () => {
     {
       text: "Students",
       path: "/Dashboard/Students",
+    },
+    {
+      text: "Graduates",
+      path: "/Dashboard/Graduates",
     },
     {
       text: "Courses",
@@ -57,7 +62,8 @@ const BottomNavBar = () => {
               icon={
                 (i === 0 && <CgListTree size={"22px"} />) ||
                 (i === 1 && <IoIosPeople size={"22px"} />) ||
-                (i === 2 && <SiCoursera size={"22px"} />)
+                (i === 2 && <PiGraduationCapFill size={"22px"} />) ||
+                (i === 3 && <SiCoursera size={"22px"} />)
               }
               key={i}
             />

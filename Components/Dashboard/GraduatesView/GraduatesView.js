@@ -2,6 +2,7 @@
 import { Box, Stack } from "@mui/material";
 import { CgMenu } from "react-icons/cg";
 import { GraduatesTable } from "./GraduatesTable";
+import { GraduatesFilter } from "./GraduatesFilter";
 export const GraduatesView = ({ students }) => {
   return (
     <Box height={{ xs: "calc(100vh - 120px)", sm: "calc(100vh - 64px)" }}>
@@ -24,14 +25,13 @@ export const GraduatesView = ({ students }) => {
               Graduates
             </Box>
           </Stack>
-          {/* <Stack
+          <Stack
             direction={"row"}
             alignItems="center"
             spacing={{ xs: "4px", sm: "10px" }}
           >
-            {admin && <UploadCSV />}
-            <StudentsFilters data={students} />
-          </Stack> */}
+            <GraduatesFilter data={students} />
+          </Stack>
         </Stack>
         {/* <STableComponent
           students={students}

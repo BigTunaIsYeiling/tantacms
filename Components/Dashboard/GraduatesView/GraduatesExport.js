@@ -10,7 +10,7 @@ import {
 import { useState } from "react";
 import exportFromJSON from "export-from-json";
 import { useSelector } from "react-redux";
-import { Filters, order, sort } from "@/Lib/FiltersSlices/StudentsSlice";
+import { Filters, order, sort } from "@/Lib/FiltersSlices/GraduatesSlice";
 export default function ExportData({ data }) {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -26,10 +26,10 @@ export default function ExportData({ data }) {
   const [ExportedFields, SetExported] = useState({
     name: true,
     division: true,
-    level: true,
-    passed_hours: true,
     gpa: true,
     total_mark: true,
+    year: true,
+    semester: true,
   });
   const handleClick = (e) => {
     SetExported({ ...ExportedFields, [e.target.name]: e.target.checked });
@@ -102,18 +102,6 @@ export default function ExportData({ data }) {
             onChange={handleClick}
           />
           <FormControlLabel
-            control={<Checkbox checked={ExportedFields.level} />}
-            label="Level"
-            name="level"
-            onChange={handleClick}
-          />
-          <FormControlLabel
-            control={<Checkbox checked={ExportedFields.passed_hours} />}
-            label="Passed hours"
-            name="passed_hours"
-            onChange={handleClick}
-          />
-          <FormControlLabel
             control={<Checkbox checked={ExportedFields.gpa} />}
             label="GPA"
             name="gpa"
@@ -123,6 +111,18 @@ export default function ExportData({ data }) {
             control={<Checkbox checked={ExportedFields.total_mark} />}
             label="Total mark"
             name="total_mark"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.semester} />}
+            label="Semester"
+            name="semester"
+            onChange={handleClick}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={ExportedFields.year} />}
+            label="Year"
+            name="year"
             onChange={handleClick}
           />
           <Button
@@ -146,9 +146,9 @@ export default function ExportData({ data }) {
                     row.name.toLowerCase().includes(filtersOption.name)
                   )
                   .filter((row) =>
-                    filtersOption.level !== ""
-                      ? row.level === Number(filtersOption.level)
-                      : true
+                    filtersOption.year.length < 4
+                      ? row
+                      : row.year == filtersOption.year
                   )
                   .filter((stu) => {
                     if (filtersOption.division.length === 0) return true;
@@ -160,35 +160,24 @@ export default function ExportData({ data }) {
                       return true;
                     return false;
                   })
+                  .filter((stu) => {
+                    if (filtersOption.month.length === 0) return true;
+                    if (filtersOption.month.includes(stu.semester.toString()))
+                      return true;
+                    return false;
+                  })
                   .sort((a, b) => {
                     return (
                       SortType === "id" &&
                       (OrderType === "asc" ? a.id - b.id : b.id - a.id)
                     );
                   })
-
                   .sort((a, b) => {
                     return (
                       SortType === "mark" &&
                       (OrderType === "asc"
                         ? a.total_mark - b.total_mark
                         : b.total_mark - a.total_mark)
-                    );
-                  })
-                  .sort((a, b) => {
-                    return (
-                      SortType === "az" &&
-                      (OrderType === "asc"
-                        ? a.name.localeCompare(b.name, ["ar"])
-                        : b.name.localeCompare(a.name, ["ar"]))
-                    );
-                  })
-                  .sort((a, b) => {
-                    return (
-                      SortType === "hours" &&
-                      (OrderType === "asc"
-                        ? a.passed_hours - b.passed_hours
-                        : b.passed_hours - a.passed_hours)
                     );
                   })
                   .sort((a, b) => {
@@ -205,16 +194,20 @@ export default function ExportData({ data }) {
                   .map((row) => {
                     let newRow = {};
                     if (ExportedFields.name) newRow.name = row.name;
-                    if (ExportedFields.level) newRow.level = row.level;
                     if (ExportedFields.division)
                       newRow.division = row.division
                         ? row.division.name
                         : row.group.name;
-                    if (ExportedFields.passed_hours)
-                      newRow.passed_hours = row.passed_hours;
                     if (ExportedFields.gpa) newRow.gpa = row.gpa;
                     if (ExportedFields.total_mark)
                       newRow.total_mark = row.total_mark;
+                    if (ExportedFields.semester && row.semester == 1)
+                      newRow.semester = "يناير";
+                    if (ExportedFields.semester && row.semester == 2)
+                      newRow.semester = "يونيو";
+                    if (ExportedFields.semester && row.semester == 3)
+                      newRow.semester = "الترم الصيفي";
+                    if (ExportedFields.year) newRow.year = row.year;
                     return newRow;
                   }),
                 fileName: filename,

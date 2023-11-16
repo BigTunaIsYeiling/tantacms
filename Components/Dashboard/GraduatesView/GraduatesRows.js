@@ -13,8 +13,15 @@ export const GraduateRow = ({
   group,
   mark,
   index,
+  year,
+  semester,
 }) => {
   const [open, setOpen] = useState(false);
+  const Month = () => {
+    if (semester == 1) return "January";
+    if (semester == 2) return "June";
+    if (semester == 3) return "Summer";
+  };
   return (
     <>
       <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -51,7 +58,7 @@ export const GraduateRow = ({
         >
           {division ? division.name : group.name}
         </TableCell>
-        <TableCell
+        {/* <TableCell
           align="left"
           //   sx={{ display: HideLevelColumn ? "none" : "table-cell" }}
         >
@@ -62,19 +69,16 @@ export const GraduateRow = ({
           //   sx={{ display: HideHoursColumn ? "none" : "table-cell" }}
         >
           {passed_hours}
-        </TableCell>
+        </TableCell> */}
         <TableCell
           align="left"
           //   sx={{ display: HideGpaColumn ? "none" : "table-cell" }}
         >
           {gpa.toFixed(3)}
         </TableCell>
-        <TableCell
-          align="left"
-          //   sx={{ display: HideGpaColumn ? "none" : "table-cell" }}
-        >
-          {mark}
-        </TableCell>
+        <TableCell align="left">{mark}</TableCell>
+        <TableCell align="left">{Month()}</TableCell>
+        <TableCell align="left">{year}</TableCell>
       </TableRow>
       <TableRow>
         <TableCell

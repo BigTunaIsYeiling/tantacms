@@ -9,7 +9,7 @@ import TablePagination from "@mui/material/TablePagination";
 import TableRow from "@mui/material/TableRow";
 import { Filters, order, sort } from "@/Lib/FiltersSlices/StudentsSlice";
 import { useSelector } from "react-redux";
-import StRows from "./Dashboard/StudentsView/StudentsRows";
+import StRows from "./StudentsRows";
 export const NewStudentsTable = ({ students, divisions, groups }) => {
   const SortType = useSelector(sort);
   const OrderType = useSelector(order);
@@ -93,7 +93,7 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
         flexGrow: 1,
       }}
     >
-      <TableContainer sx={{ maxHeight: 560 }}>
+      <TableContainer sx={{ maxHeight: { xs: 495, sm: 560 } }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead
           // sx={{
@@ -220,7 +220,6 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
                   (OrderType === "asc" ? a.id - b.id : b.id - a.id)
                 );
               })
-
               .sort((a, b) => {
                 return (
                   SortType === "mark" &&

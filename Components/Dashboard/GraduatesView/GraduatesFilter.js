@@ -18,14 +18,15 @@ import {
   order,
   sort,
   FilterName,
-  Filterlevel,
   SetSort,
   SetOrder,
   SetLimit,
-} from "@/Lib/FiltersSlices/StudentsSlice";
-import Scelection from "./StudentsSelection";
+  SetYear,
+} from "@/Lib/FiltersSlices/GraduatesSlice";
 import ExportData from "./GraduatesExport";
-export const StudentsFilters = ({ data }) => {
+import Scelection from "./GraduatesSelection";
+import MonthSelections from "./monthSelection";
+export const GraduatesFilter = ({ data }) => {
   const [open, setOpen] = useState(false);
   const handleClick = () => {
     setOpen(true);
@@ -90,9 +91,9 @@ export const StudentsFilters = ({ data }) => {
                   boxShadow:
                     "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
                 }}
-                placeholder={"level"}
-                value={filtersOption.level}
-                onChange={(e) => dispatch(Filterlevel(e.target.value))}
+                placeholder={"Year"}
+                value={filtersOption.year}
+                onChange={(e) => dispatch(SetYear(e.target.value))}
               />
             </Stack>
           </Stack>
@@ -122,6 +123,10 @@ export const StudentsFilters = ({ data }) => {
             </Stack>
           </Stack>
           <Stack direction={"column"} spacing="10px">
+            <Box fontWeight={700}>Month</Box>
+            <MonthSelections />
+          </Stack>
+          <Stack direction={"column"} spacing="10px">
             <Box fontWeight={700}>Department</Box>
             <Scelection data={data} />
           </Stack>
@@ -136,12 +141,6 @@ export const StudentsFilters = ({ data }) => {
                 onChange={(e) => dispatch(SetSort(e.target.value))}
               >
                 <FormControlLabel value="id" control={<Radio />} label="ID" />
-                <FormControlLabel value="az" control={<Radio />} label="AZ" />
-                <FormControlLabel
-                  value="hours"
-                  control={<Radio />}
-                  label="Hours"
-                />
                 <FormControlLabel value="gpa" control={<Radio />} label="GPA" />
                 <FormControlLabel
                   value="mark"

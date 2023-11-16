@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import {
   AppBar,
   Box,
@@ -17,6 +17,11 @@ import { useState } from "react";
 import { HiUserAdd } from "react-icons/hi";
 import { BiLogOut } from "react-icons/bi";
 import { navwidth, opennav } from "@/Lib/NavSlice";
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
+import { ResetFilters } from "@/Lib/FiltersSlices/CoursesSlice";
+import { ResetFiltersStu } from "@/Lib/FiltersSlices/StudentsSlice";
+import { ResetFiltersgrad } from "@/Lib/FiltersSlices/GraduatesSlice";
 const Header = () => {
   const fullwidthNav = useSelector(navwidth);
   const dispatch = useDispatch();
@@ -36,6 +41,28 @@ const Header = () => {
   const handleClosed = () => {
     setOpen(false);
   };
+  const router = useRouter();
+  const Logout = async () => {
+    await fetch("http://127.0.0.1:8000/accounts/logout/", {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Cookies.get("key")}`,
+      },
+    })
+      .then(() => {
+        Cookies.remove("key");
+        Cookies.remove("accessToken");
+      })
+      .finally(() => {
+        dispatch(ResetFilters());
+        dispatch(ResetFiltersStu());
+        dispatch(ResetFiltersgrad());
+        return router.push("/");
+      });
+  };
+
   return (
     <Box
       sx={{
@@ -101,16 +128,7 @@ const Header = () => {
             }}
             sx={{ display: { xs: "block", sm: "none" } }}
           >
-            <MenuItem onClick={handleClose} disabled>
-              <ListItemIcon>
-                <HiUserAdd fontSize={"25px"} />
-              </ListItemIcon>
-              <ListItemText>
-                Add User
-                <Box fontSize={"0.75rem"}>Admins only</Box>
-              </ListItemText>
-            </MenuItem>
-            <MenuItem onClick={handleClose}>
+            <MenuItem onClick={Logout}>
               <ListItemIcon>
                 <BiLogOut fontSize={"25px"} />
               </ListItemIcon>
