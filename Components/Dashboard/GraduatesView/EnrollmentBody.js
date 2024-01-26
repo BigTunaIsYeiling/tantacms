@@ -38,11 +38,19 @@ export const EnrollmentBody = ({ id }) => {
       </>
     );
   }
-  console.log(data);
   return (
     <Box>
       <Table size="small">
-        <TableHead sx={{ backgroundColor: "#F6490D" }}>
+        <TableHead
+          sx={{
+            backgroundColor: "#F6490D",
+            position: "sticky",
+            top: open ? 56 : 0,
+            zIndex: 1,
+            left: 0,
+            right: 0,
+          }}
+        >
           <TableRow>
             <TableCell sx={{ color: "white" }}>Name</TableCell>
             <TableCell align="right" sx={{ color: "white" }}>

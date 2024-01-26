@@ -248,6 +248,11 @@ export const GraduatesTable = ({ students }) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{
+          ".MuiToolbar-root": {
+            minHeight: "0px",
+          },
+        }}
       />
     </Paper>
   );

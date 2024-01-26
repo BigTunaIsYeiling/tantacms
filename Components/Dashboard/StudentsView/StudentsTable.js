@@ -96,13 +96,6 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
       <TableContainer sx={{ maxHeight: { xs: 495, sm: 560 } }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead
-          // sx={{
-          //   backgroundColor: "#f9f9f9",
-          //   position: "sticky",
-          //   top: 0,
-          //   zIndex: 1,
-          // }}
-          // className="StableHead"
           >
             <TableRow>
               <TableCell
@@ -289,6 +282,11 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
+        sx={{
+          ".MuiToolbar-root": {
+            minHeight: "0px",
+          },
+        }}
       />
     </Paper>
   );

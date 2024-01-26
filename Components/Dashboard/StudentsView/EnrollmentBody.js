@@ -5,6 +5,7 @@ import {
   Table,
   TableBody,
   TableCell,
+  TableContainer,
   TableHead,
   TableRow,
 } from "@mui/material";
@@ -12,7 +13,7 @@ import useSWR from "swr";
 import { EnrollmentRows } from "./Enrollments";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
-export const EnrollmentBody = ({ id }) => {
+export const EnrollmentBody = ({ id, open }) => {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const fetcher = async (url) => {
     await delay(500);
@@ -41,8 +42,17 @@ export const EnrollmentBody = ({ id }) => {
   return (
     <Box>
       <Table size="small">
-        <TableHead sx={{ backgroundColor: "#F6490D" }}>
-          <TableRow>
+        <TableHead
+          sx={{
+            backgroundColor: "#F6490D",
+            position: "sticky",
+            top: open ? 56 : 0,
+            zIndex: 1,
+            left: 0,
+            right: 0,
+          }}
+        >
+          <TableRow sx={{ position: "sticky", top: 0 }}>
             <TableCell sx={{ color: "white" }}>Name</TableCell>
             <TableCell align="right" sx={{ color: "white" }}>
               Level
