@@ -87,7 +87,7 @@ export const GraduateRow = ({
           padding={"none"}
         >
           <Collapse in={open} timeout="auto" unmountOnExit>
-            <EnrollmentBody id={id} />
+            <EnrollmentBody id={id} open={open} />
           </Collapse>
         </TableCell>
       </TableRow>

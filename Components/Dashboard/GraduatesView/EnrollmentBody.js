@@ -12,7 +12,7 @@ import useSWR from "swr";
 import { EnrollmentRows } from "./Enrollments";
 import Cookies from "js-cookie";
 import { motion } from "framer-motion";
-export const EnrollmentBody = ({ id }) => {
+export const EnrollmentBody = ({ id, open }) => {
   const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
   const fetcher = async (url) => {
     await delay(500);
