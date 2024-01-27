@@ -16,10 +16,7 @@ import toast from "react-hot-toast";
 import { MdAddCircle } from "react-icons/md";
 import { RiCloseLine } from "react-icons/ri";
 import { useRouter } from "next/navigation";
-import BasicSelectDepartMent1 from "./Department1Selection";
-import BasicSelectDepartMent2 from "./Department2Selection";
-import BasicSelectDepartMentRegulation from "./AddDivision'sRegulation";
-export const AddDivision = ({ data, regulations }) => {
+export const AddRegulation = () => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -28,19 +25,17 @@ export const AddDivision = ({ data, regulations }) => {
     setOpen(false);
   };
   const router = useRouter();
-  const [division, setDivision] = useState({
+  const [Regulation, setRegulation] = useState({
     name: "",
-    hours: "",
-    department: null,
-    department2: null,
-    private: false,
-    group: false,
-    regulation: null,
+    max_gpa: "",
   });
-  const AddDivisionMethod = async () => {
-    await fetch("http://127.0.0.1:8000/divisions/", {
+  const AddRegulationMethod = async () => {
+    await fetch("http://127.0.0.1:8000/regulations/", {
       method: "POST",
-      body: JSON.stringify(division),
+      body: JSON.stringify({
+        name: Regulation.name,
+        max_gpa: Number(Regulation.max_gpa),
+      }),
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
@@ -49,15 +44,10 @@ export const AddDivision = ({ data, regulations }) => {
     }).then((res) => {
       if (res.ok) {
         router.refresh();
-        toast.success("Division Added");
-        setDivision({
+        toast.success("Regulation Added");
+        setRegulation({
           name: "",
-          hours: "",
-          department: null,
-          department2: null,
-          private: false,
-          group: false,
-          regulation: null,
+          max_gpa: "",
         });
         return handleClose();
       } else {
@@ -67,10 +57,12 @@ export const AddDivision = ({ data, regulations }) => {
     });
   };
   const handlechange = (e) => {
-    const { name, value, checked, type } = e.target;
-    setDivision({
-      ...division,
-      [name]: type === "checkbox" ? checked : value,
+    const { name, value } = e.target;
+    setRegulation((prev) => {
+      return {
+        ...prev,
+        [name]: value,
+      };
     });
   };
   return (
@@ -82,7 +74,7 @@ export const AddDivision = ({ data, regulations }) => {
       </Tooltip>
       <Dialog open={open} onClose={handleClose}>
         <Box padding={"3rem"}>
-          <Box fontWeight={600}>Add Division</Box>
+          <Box fontWeight={600}>Add Regulation</Box>
           <Stack direction={"column"} spacing={"2rem"} marginTop={"1rem"}>
             <Box
               component={"input"}
@@ -102,23 +94,8 @@ export const AddDivision = ({ data, regulations }) => {
               }}
               placeholder={"Name"}
               name="name"
-              value={division.name}
+              value={Regulation.name}
               onChange={handlechange}
-            />
-            <BasicSelectDepartMent1
-              data={data}
-              department={division.department}
-              setdata={setDivision}
-            />
-            <BasicSelectDepartMent2
-              data={data}
-              department={division.department2}
-              setdata={setDivision}
-            />
-            <BasicSelectDepartMentRegulation
-              data={regulations}
-              setdata={setDivision}
-              regulation={division.regulation}
             />
             <Box
               component={"input"}
@@ -136,43 +113,11 @@ export const AddDivision = ({ data, regulations }) => {
                 boxShadow:
                   "rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px",
               }}
-              placeholder={"Hours"}
-              name="hours"
-              value={division.hours}
+              placeholder={"GPA"}
+              name="max_gpa"
+              value={Regulation.max_gpa}
               onChange={handlechange}
             />
-            <FormGroup>
-              <FormControlLabel
-                sx={{
-                  margin: "10px 0 0 0",
-                  ".MuiFormControlLabel-label": {
-                    fontWeight: 700,
-                    fontSize: "14px",
-                  },
-                }}
-                control={<Checkbox />}
-                label="Private ?"
-                name="private"
-                onChange={handlechange}
-                value={division.private}
-              />
-            </FormGroup>
-            <FormGroup>
-              <FormControlLabel
-                sx={{
-                  margin: "10px 0 0 0",
-                  ".MuiFormControlLabel-label": {
-                    fontWeight: 700,
-                    fontSize: "14px",
-                  },
-                }}
-                control={<Checkbox />}
-                label="Group ?"
-                name="group"
-                onChange={handlechange}
-                value={division.group}
-              />
-            </FormGroup>
             <Button
               variant="contained"
               disableElevation
@@ -184,7 +129,7 @@ export const AddDivision = ({ data, regulations }) => {
                 },
                 alignSelf: "flex-end",
               }}
-              onClick={AddDivisionMethod}
+              onClick={AddRegulationMethod}
             >
               Confirm
             </Button>

@@ -6,9 +6,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
-import DivisionsRows from "./DivisionsRows";
-import { useSelector } from "react-redux";
-const DivisionsTable = ({ divisions }) => {
+import RegulationsRows from "./RegulationsRows";
+const RegulationsTable = ({ data }) => {
   return (
     <TableContainer
       component={Paper}
@@ -44,7 +43,7 @@ const DivisionsTable = ({ divisions }) => {
                 whiteSpace: "nowrap",
               }}
             >
-              Department
+              GPA
             </TableCell>
             <TableCell
               align="left"
@@ -52,33 +51,17 @@ const DivisionsTable = ({ divisions }) => {
                 whiteSpace: "nowrap",
               }}
             >
-              Hours
-            </TableCell>
-            <TableCell
-              align="left"
-              sx={{
-                whiteSpace: "nowrap",
-              }}
-            >
-              Condition
-            </TableCell>
-            <TableCell
-              align="left"
-              sx={{
-                whiteSpace: "nowrap",
-              }}
-            >
-              Regulation
+              Edit
             </TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {divisions.map((row) => (
-            <DivisionsRows key={row.name} {...row} special={row.private} />
+          {data.map((row) => (
+            <RegulationsRows key={row.name} {...row} />
           ))}
         </TableBody>
       </Table>
     </TableContainer>
   );
 };
-export default DivisionsTable;
+export default RegulationsTable;

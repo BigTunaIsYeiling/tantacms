@@ -20,7 +20,7 @@ export async function Login(data) {
   const res = await response.json();
   if (res.accessToken) {
     cookies().set("accessToken", res.accessToken);
-    redirect("/Dashboard/Divisions");
+    redirect("/Dashboard/Regulations");
   }
   return res;
 }

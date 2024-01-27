@@ -18,6 +18,7 @@ import { BiLogOut } from "react-icons/bi";
 import { useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { closenav, navwidth } from "@/Lib/NavSlice";
+import { IoMdPaper } from "react-icons/io";
 import { usePathname, useRouter } from "next/navigation";
 import Link from "next/link";
 import Cookies from "js-cookie";
@@ -33,6 +34,10 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
   const fullwidthNav = useSelector(navwidth);
   const dispatch = useDispatch();
   const NavOptions = [
+    {
+      text: "Regulations",
+      path: "/Dashboard/Regulations",
+    },
     {
       text: "Departments",
       path: "/Dashboard/Divisions",
@@ -99,6 +104,14 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
             <ListItemButton LinkComponent={Link} href={opt.path}>
               <ListItemIcon>
                 {i === 0 && (
+                  <IoMdPaper
+                    color={
+                      pathname === "/Dashboard/Regulations" ? "#F6490D" : "#777"
+                    }
+                    size={"22px"}
+                  />
+                )}
+                {i === 1 && (
                   <CgListTree
                     color={
                       pathname === "/Dashboard/Divisions" ? "#F6490D" : "#777"
@@ -106,7 +119,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                     size={"22px"}
                   />
                 )}
-                {i === 1 && (
+                {i === 2 && (
                   <IoIosPeople
                     color={
                       pathname === "/Dashboard/Students" ? "#F6490D" : "#777"
@@ -114,7 +127,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                     size={"22px"}
                   />
                 )}
-                {i === 2 && (
+                {i === 3 && (
                   <PiGraduationCapFill
                     color={
                       pathname === "/Dashboard/Graduates" ? "#F6490D" : "#777"
@@ -122,7 +135,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                     size={"22px"}
                   />
                 )}
-                {i === 3 && (
+                {i === 4 && (
                   <SiCoursera
                     color={
                       pathname === "/Dashboard/Courses" ? "#F6490D" : "#777"

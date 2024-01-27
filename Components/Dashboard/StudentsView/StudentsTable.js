@@ -11,7 +11,6 @@ import { Filters, order, sort } from "@/Lib/FiltersSlices/StudentsSlice";
 import { useSelector } from "react-redux";
 import StRows from "./StudentsRows";
 export const NewStudentsTable = ({ students, divisions, groups }) => {
-  console.log(students);
   const SortType = useSelector(sort);
   const OrderType = useSelector(order);
   const filtersOption = useSelector(Filters);

@@ -1,10 +1,10 @@
 "use client";
 import { Box, Stack } from "@mui/material";
 import { CgMenu } from "react-icons/cg";
-import DivisionsTable from "./DivisionsTable";
-import { AddDivision } from "../Add Components/AddDivision";
+import RegulationsTable from "./RegulationsTable";
+import { AddRegulation } from "../Add Components/AddRegulation";
 // import exportFromJSON from "export-from-json";
-const DivisionsView = ({ divisions, data, regulations }) => {
+const RegulationsView = ({ data }) => {
   return (
     <Box height={{ xs: "calc(100vh - 120px)", sm: "calc(100vh - 64px)" }}>
       <Stack direction={"column"} width="100%" maxHeight={"100%"}>
@@ -23,7 +23,7 @@ const DivisionsView = ({ divisions, data, regulations }) => {
               fontSize={{ xs: "14px", sm: "16px" }}
               marginLeft={"8px"}
             >
-              Divisions
+              Regulations
             </Box>
           </Stack>
           <Stack
@@ -31,12 +31,12 @@ const DivisionsView = ({ divisions, data, regulations }) => {
             alignItems="center"
             spacing={{ xs: "4px", sm: "10px" }}
           >
-            <AddDivision regulations={regulations} data={data} />
+            <AddRegulation />
           </Stack>
         </Stack>
-        <DivisionsTable divisions={divisions} />
+        <RegulationsTable data={data} />
       </Stack>
     </Box>
   );
 };
-export default DivisionsView;
+export default RegulationsView;

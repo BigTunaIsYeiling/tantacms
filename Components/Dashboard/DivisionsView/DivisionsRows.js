@@ -8,6 +8,7 @@ export default function DivisionsRows({
   department2,
   group,
   special,
+  regulation
 }) {
   const GetCondition = () => {
     if (group) return "Group";
@@ -24,6 +25,7 @@ export default function DivisionsRows({
       </TableCell>
       <TableCell align="left">{hours}</TableCell>
       <TableCell align="left">{GetCondition()}</TableCell>
+      <TableCell align="left">{regulation.name}</TableCell>
     </TableRow>
   );
 }
