@@ -22,7 +22,8 @@ import { useRouter } from "next/navigation";
 import { ResetFilters } from "@/Lib/FiltersSlices/CoursesSlice";
 import { ResetFiltersStu } from "@/Lib/FiltersSlices/StudentsSlice";
 import { ResetFiltersgrad } from "@/Lib/FiltersSlices/GraduatesSlice";
-const Header = () => {
+import ToggleRegulation from "./ToggleRegulations";
+const Header = ({ data }) => {
   const fullwidthNav = useSelector(navwidth);
   const dispatch = useDispatch();
   const [anchorEl, setAnchorEl] = useState(null);
@@ -118,6 +119,7 @@ const Header = () => {
           >
             <FaUserCog color="white" />
           </IconButton>
+          <ToggleRegulation data={data} />
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}

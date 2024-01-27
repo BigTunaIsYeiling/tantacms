@@ -7,20 +7,23 @@ export const metadata = {
 import { Box, Stack } from "@/Components/MuiComponents";
 import GetAccounts from "@/Lib/GetAccounts";
 import GetDivisions from "@/Lib/GetDivisions";
+import GetRegulations from "@/Lib/GetRegulations";
 import { verifyAccess } from "@/Lib/VerifyAccess";
 import { SignCookie } from "@/Lib/signCookie";
 export default async function DashboardLayout({ children }) {
   const user = await verifyAccess();
   const AccountsData = GetAccounts(user.key);
   const DivisionsData = GetDivisions(user.key);
-  const [accounts, divisions] = await Promise.all([
+  const RegulationsData = GetRegulations(user.key);
+  const [accounts, divisions, regulations] = await Promise.all([
     AccountsData,
     DivisionsData,
+    RegulationsData,
   ]);
   return (
     <Box>
       {!user.error && <SignCookie token={user.key} />}
-      <Header />
+      <Header data={regulations} />
       <BottomNavBar />
       <Stack
         position={"absolute"}

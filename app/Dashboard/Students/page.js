@@ -3,9 +3,12 @@ import GetDivisions from "@/Lib/GetDivisions";
 import GetGroups from "@/Lib/GetGroups";
 import GetStudents from "@/Lib/GetStudents";
 import { verifyAccess } from "@/Lib/VerifyAccess";
+import { cookies } from "next/headers";
 export default async function page() {
   const data = await verifyAccess();
-  const StudentsData = GetStudents(data.key);
+  const cookieStore = cookies();
+  const regulation = cookieStore.get("regulation")?.value;
+  const StudentsData = GetStudents({ key: data.key, regulation });
   const DivisionsData = GetDivisions(data.key);
   const GroupsData = GetGroups(data.key);
   const [students, divisions, groups] = await Promise.all([

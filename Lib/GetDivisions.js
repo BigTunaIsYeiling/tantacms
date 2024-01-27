@@ -1,9 +1,14 @@
-export default async function GetDivisions(key) {
-  const response = await fetch("http://127.0.0.1:8000/divisions/", {
-    headers: {
-      Authorization: `Bearer ${key}`,
-    },
-    cache: "no-store",
-  });
+export default async function GetDivisions({ key, regulation }) {
+  const response = await fetch(
+    `http://127.0.0.1:8000/divisions/${
+      regulation === undefined || !regulation ? "" : `?regulation=${regulation}`
+    }`,
+    {
+      headers: {
+        Authorization: `Bearer ${key}`,
+      },
+      cache: "no-store",
+    }
+  );
   return response.json();
 }

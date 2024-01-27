@@ -68,6 +68,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
       .then(() => {
         Cookies.remove("key");
         Cookies.remove("accessToken");
+        Cookies.remove("regulation");
       })
       .finally(() => {
         dispatch(ResetFilters());
