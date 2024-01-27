@@ -12,9 +12,11 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
+import { Modal } from "antd";
 const UploadCSV = () => {
   const [file, setFile] = useState(null);
   const [open, setOpen] = useState(false);
+  const [modal2Open, setModal2Open] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -23,6 +25,7 @@ const UploadCSV = () => {
     setOpen(false);
   };
   const router = useRouter();
+  const [Results, setResults] = useState(null);
   const UploadFileAction = () => {
     const formData = new FormData();
     formData.append("file", file);
@@ -35,7 +38,7 @@ const UploadCSV = () => {
       headers: {
         Authorization: `Bearer ${Cookies.get("key")}`,
       },
-    }).then((res) => {
+    }).then(async (res) => {
       if (res.ok) {
         toast.dismiss(toastId);
         toast.success("UpLoaded Succesfully", {
@@ -43,6 +46,26 @@ const UploadCSV = () => {
         });
         router.refresh();
         setFile(null);
+        const result = await res.json();
+        const outputObject = {};
+        result.forEach((entry) => {
+          const studentName = entry.student;
+          const courseInfo = { course: entry.course, status: entry.status };
+
+          if (!outputObject[studentName]) {
+            outputObject[studentName] = { reports: [courseInfo] };
+          } else {
+            outputObject[studentName].reports.push(courseInfo);
+          }
+        });
+        const outputArray = Object.entries(outputObject).map(
+          ([student, data]) => ({
+            student: student,
+            reports: data.reports,
+          })
+        );
+        setResults(outputArray);
+        setModal2Open(true);
         return handleClose();
       }
     });
@@ -175,6 +198,31 @@ const UploadCSV = () => {
           </IconButton>
         </Box>
       </Dialog>
+      <Modal
+        title="Upload Results"
+        centered
+        open={modal2Open}
+        onCancel={() => setModal2Open(false)}
+        okButtonProps={{
+          style: {
+            display: "none",
+          },
+        }}
+      >
+        {Results &&
+          Results.map((result, index) => (
+            <Box key={index} padding={"1rem"}>
+              <Box fontSize={"17px"} fontWeight={600}>
+                {result.student}
+              </Box>
+              {result.reports.map((report, index) => (
+                <Box key={index} fontSize={"15px"} fontWeight={300}>
+                  {report.course} - {report.status}
+                </Box>
+              ))}
+            </Box>
+          ))}
+      </Modal>
     </>
   );
 };
