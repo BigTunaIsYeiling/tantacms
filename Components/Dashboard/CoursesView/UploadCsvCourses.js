@@ -23,19 +23,27 @@ const UploadCSV = () => {
     setOpen(false);
   };
   const router = useRouter();
+  const regulation = Cookies.get("regulation");
   const UploadFileAction = () => {
     const formData = new FormData();
     formData.append("file", file);
     const toastId = toast.loading("Uploading.....", {
       position: "top-center",
     });
-    fetch("http://127.0.0.1:8000/data/upload_courses/", {
-      method: "POST",
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${Cookies.get("key")}`,
-      },
-    }).then((res) => {
+    fetch(
+      `http://127.0.0.1:8000/data/upload_courses/${
+        regulation === undefined || !regulation
+          ? ""
+          : `?regulation=${regulation}`
+      }`,
+      {
+        method: "POST",
+        body: formData,
+        headers: {
+          Authorization: `Bearer ${Cookies.get("key")}`,
+        },
+      }
+    ).then((res) => {
       if (res.ok) {
         toast.dismiss(toastId);
         toast.success("UpLoaded Succesfully", {
