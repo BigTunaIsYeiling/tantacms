@@ -83,7 +83,7 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
         return index < Number(filtersOption.limit);
       }).length;
     setStudentsLenght(length);
-  }, [filtersOption]);
+  }, [filtersOption, students]);
   return (
     <Paper
       sx={{
@@ -95,8 +95,7 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
     >
       <TableContainer sx={{ maxHeight: { xs: 495, sm: 560 } }}>
         <Table stickyHeader aria-label="sticky table">
-          <TableHead
-          >
+          <TableHead>
             <TableRow>
               <TableCell
                 sx={{

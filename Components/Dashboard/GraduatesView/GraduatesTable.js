@@ -69,7 +69,7 @@ export const GraduatesTable = ({ students }) => {
         return index < Number(filtersOption.limit);
       }).length;
     setStudentsLenght(length);
-  }, [filtersOption]);
+  }, [filtersOption,students]);
   return (
     <Paper
       sx={{
