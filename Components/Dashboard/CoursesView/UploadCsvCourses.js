@@ -12,7 +12,7 @@ import { useState } from "react";
 import Cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useRouter } from "next/navigation";
-const UploadCSV = () => {
+const UploadCSVCourses = () => {
   const [file, setFile] = useState(null);
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
@@ -186,4 +186,4 @@ const UploadCSV = () => {
     </>
   );
 };
-export default UploadCSV;
+export default UploadCSVCourses;

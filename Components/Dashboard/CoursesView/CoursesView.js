@@ -3,7 +3,7 @@ import { Box, Stack } from "@mui/material";
 import { CgMenu } from "react-icons/cg";
 import CoursesTable from "./CoursesTable";
 import CoursesFilters from "./CoursesFilter";
-import UploadCSV from "./UploadCsvCourses";
+import UploadCSVCourses from "./UploadCsvCourses";
 const CoursesView = ({ courses, admin }) => {
   return (
     <Box height={{ xs: "calc(100vh - 120px)", sm: "calc(100vh - 64px)" }}>
@@ -31,7 +31,7 @@ const CoursesView = ({ courses, admin }) => {
             alignItems="center"
             spacing={{ xs: "4px", sm: "10px" }}
           >
-            {admin && <UploadCSV />}
+            {admin && <UploadCSVCourses />}
             <CoursesFilters data={courses} />
           </Stack>
         </Stack>
