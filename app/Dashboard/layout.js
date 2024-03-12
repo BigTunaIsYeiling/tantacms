@@ -10,10 +10,13 @@ import GetDivisions from "@/Lib/GetDivisions";
 import GetRegulations from "@/Lib/GetRegulations";
 import { verifyAccess } from "@/Lib/VerifyAccess";
 import { SignCookie } from "@/Lib/signCookie";
+import { cookies } from "next/headers";
 export default async function DashboardLayout({ children }) {
   const user = await verifyAccess();
+  const cookieStore = cookies();
+  const regulation = cookieStore.get("regulation")?.value;
   const AccountsData = GetAccounts(user.key);
-  const DivisionsData = GetDivisions(user.key);
+  const DivisionsData = GetDivisions({ key: user.key, regulation });
   const RegulationsData = GetRegulations(user.key);
   const [accounts, divisions, regulations] = await Promise.all([
     AccountsData,

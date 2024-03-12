@@ -106,13 +106,6 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
                 ID
               </TableCell>
               <TableCell
-                sx={{
-                  whiteSpace: "nowrap",
-                }}
-              >
-                Enrollments
-              </TableCell>
-              <TableCell
                 align="left"
                 sx={{
                   whiteSpace: "nowrap",
@@ -165,6 +158,15 @@ export const NewStudentsTable = ({ students, divisions, groups }) => {
                 }}
               >
                 Total Mark
+              </TableCell>
+              <TableCell
+                align="left"
+                sx={{
+                  whiteSpace: "nowrap",
+                  // display: HideGpaColumn ? "none" : "table-cell",
+                }}
+              >
+                Detail
               </TableCell>
               <TableCell
                 align="left"

@@ -15,6 +15,8 @@ import { EnrollmentsRows } from "./Enrollments";
 import { EditStudent } from "../Edit Components/EditStudent";
 import { DeleteStudent } from "../Delete Components/DeleteStudent";
 import { EnrollmentBody } from "./EnrollmentBody";
+import { BiSolidUserDetail } from "react-icons/bi";
+import { redirect, useRouter } from "next/navigation";
 const StRows = ({
   id,
   name,
@@ -29,6 +31,7 @@ const StRows = ({
   index,
 }) => {
   const [open, setOpen] = useState(false);
+  const router = useRouter();
   return (
     <>
       <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
@@ -37,15 +40,6 @@ const StRows = ({
           //   sx={{ display: HideidColumn ? "none" : "table-cell" }}
         >
           {index + 1}
-        </TableCell>
-        <TableCell>
-          <IconButton
-            aria-label="expand row"
-            size="small"
-            onClick={() => setOpen(!open)}
-          >
-            {open ? <BiUpArrowAlt color="#F6490D" /> : <BiDownArrowAlt />}
-          </IconButton>
         </TableCell>
         <TableCell
           align="left"
@@ -90,6 +84,15 @@ const StRows = ({
           {mark}
         </TableCell>
         <TableCell>
+          <IconButton
+            onClick={() => {
+              router.push(`/Dashboard/Students/${id}`);
+            }}
+          >
+            <BiSolidUserDetail color="black" />
+          </IconButton>
+        </TableCell>
+        <TableCell>
           <EditStudent
             id={id}
             division={division?.id}
@@ -103,7 +106,7 @@ const StRows = ({
           <DeleteStudent id={id} />
         </TableCell>
       </TableRow>
-      <TableRow>
+      {/* <TableRow>
         <TableCell
           style={{ paddingBottom: 0, paddingTop: 0 }}
           colSpan={10}
@@ -113,7 +116,7 @@ const StRows = ({
             <EnrollmentBody id={id} open={open} />
           </Collapse>
         </TableCell>
-      </TableRow>
+      </TableRow> */}
     </>
   );
 };
