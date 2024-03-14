@@ -25,7 +25,7 @@ export const EnrollmentsView = ({ details }) => {
             </Box>
           </Stack>
         </Stack>
-        <Box marginTop={3} marginLeft={{ xs: "0", sm: "72px" }}>
+        <Box marginTop={3}>
           <EnrollmentsDetails student={details} />
         </Box>
       </Stack>
