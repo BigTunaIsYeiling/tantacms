@@ -123,7 +123,9 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                 {i === 2 && (
                   <IoIosPeople
                     color={
-                      pathname === "/Dashboard/Students" ? "#F6490D" : "#777"
+                      pathname.startsWith("/Dashboard/Students")
+                        ? "#F6490D"
+                        : "#777"
                     }
                     size={"22px"}
                   />

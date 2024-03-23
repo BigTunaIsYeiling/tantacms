@@ -9,7 +9,7 @@ export default async function page() {
   const cookieStore = cookies();
   const regulation = cookieStore.get("regulation")?.value;
   const StudentsData = GetStudents({ key: data.key, regulation });
-  const DivisionsData = GetDivisions(data.key);
+  const DivisionsData = GetDivisions({ key: data.key, regulation });
   const GroupsData = GetGroups(data.key);
   const [students, divisions, groups] = await Promise.all([
     StudentsData,

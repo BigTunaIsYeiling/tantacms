@@ -4,7 +4,7 @@ import EnrollmentsDetails from "./EnrollmentsDetails";
 
 export const EnrollmentsView = ({ details }) => {
   return (
-    <Box>
+    <Box height={"100%"} sx={{ overflowY: "auto", overflowX: "hidden" }}>
       <Stack direction={"column"} width="100%" height={"100%"}>
         <Stack
           paddingX={"0.5rem"}

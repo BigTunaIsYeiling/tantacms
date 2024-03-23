@@ -5,15 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { RiCloseLine, RiFileEditFill } from "react-icons/ri";
-export const EditEnrollment = ({
-  id,
-  points,
-  grade,
-  mark,
-  fullMark,
-  StudentId,
-  revalidate,
-}) => {
+export const EditEnrollment = ({ id, points, grade, mark, fullMark }) => {
   const [open, setOpen] = useState(false);
   const handleClickOpen = () => {
     setOpen(true);
@@ -46,7 +38,7 @@ export const EditEnrollment = ({
       if (res.ok) {
         handleClose();
         toast.success("Enrollment Updated successfully");
-        return revalidate();
+        return router.refresh();
       } else {
         return res.json();
       }

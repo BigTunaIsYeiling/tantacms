@@ -1,42 +1,34 @@
-import { TableCell } from "@mui/material";
+import { TableCell, TableRow } from "@mui/material";
 import { EditEnrollment } from "../Edit Components/EditEnrollMent";
 import { DeleteEnrollment } from "../Delete Components/DeleteEnrollment";
-export const EnrollmentRows = ({
+export const EnrollmentsRow = ({
   id,
-  mark,
   course,
-  level,
-  semester,
+  mark,
   full_mark,
   grade,
   points,
-  StudentId,
-  revalidate,
 }) => {
   return (
-    <>
+    <TableRow sx={{ "&:last-child td, &:last-child th": { border: 0 } }}>
       <TableCell component="th" scope="row">
         {course.name}
       </TableCell>
-      <TableCell align="right">{level}</TableCell>
-      <TableCell align="right">{semester === 3 ? "SC" : semester}</TableCell>
       <TableCell align="right">{mark + "/" + full_mark}</TableCell>
       <TableCell align="right">{grade}</TableCell>
-      <TableCell align="right">{points.toFixed(4)}</TableCell>
-      <TableCell align="right">
+      <TableCell align="right">{points}</TableCell>
+      {/* <TableCell align="right">
         <EditEnrollment
           id={id}
+          mark={mark}
           fullMark={full_mark}
           grade={grade}
           points={points}
-          mark={mark}
-          StudentId={StudentId}
-          revalidate={revalidate}
         />
       </TableCell>
-      <TableCell align="left">
-        <DeleteEnrollment id={id} revalidate={revalidate} />
-      </TableCell>
-    </>
+      <TableCell align="right">
+        <DeleteEnrollment id={id} />
+      </TableCell> */}
+    </TableRow>
   );
 };
