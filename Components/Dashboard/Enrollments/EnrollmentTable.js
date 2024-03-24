@@ -8,7 +8,12 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Box, Stack } from "@mui/material";
 import { EnrollmentsRow } from "./EnrollmentsRow";
-export default function EnrollmentTable({ enrollments, level, semester }) {
+export default function EnrollmentTable({
+  enrollments,
+  level,
+  semester,
+  points,
+}) {
   return (
     <Box
       component={Stack}
@@ -25,27 +30,37 @@ export default function EnrollmentTable({ enrollments, level, semester }) {
           <TableHead sx={{ backgroundColor: "#F6490D" }}>
             <TableRow>
               <TableCell sx={{ color: "white" }}>Name</TableCell>
+              <TableCell sx={{ color: "white" }}>Hours</TableCell>
               <TableCell align="right" sx={{ color: "white" }}>
                 Mark
               </TableCell>
               <TableCell align="right" sx={{ color: "white" }}>
                 Grade
               </TableCell>
-              <TableCell align="right" sx={{ color: "white" }}>
+              <TableCell align="left" sx={{ color: "white" }}>
                 Points
               </TableCell>
-              {/* <TableCell align="right" sx={{ color: "white" }}>
+              <TableCell align="right" sx={{ color: "white" }}>
                 Edit
               </TableCell>
               <TableCell align="right" sx={{ color: "white" }}>
                 Delete
-              </TableCell> */}
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {enrollments.map((row) => (
-              <EnrollmentsRow {...row} key={row.id} />
+              <EnrollmentsRow {...row} key={row.id} fullPoints={points} />
             ))}
+            <TableRow>
+              <TableCell>Total Points</TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell>{points ? points : "0"}</TableCell>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>

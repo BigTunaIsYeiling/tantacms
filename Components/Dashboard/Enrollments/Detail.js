@@ -7,6 +7,7 @@ const STudentDetail = ({ semester }) => {
       enrollments={semester.enrollments}
       level={semester.level}
       semester={semester.semester}
+      points={semester.points}
     />
   );
 };
