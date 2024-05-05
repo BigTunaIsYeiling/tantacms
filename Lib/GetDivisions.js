@@ -1,6 +1,6 @@
 export default async function GetDivisions({ key, regulation }) {
   const response = await fetch(
-    `http://127.0.0.1:8000/divisions/${
+    `https://ultramacro.onrender.com/divisions/${
       regulation === undefined || !regulation ? "" : `?regulation=${regulation}`
     }`,
     {

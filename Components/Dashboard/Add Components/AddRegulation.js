@@ -30,7 +30,7 @@ export const AddRegulation = () => {
     max_gpa: "",
   });
   const AddRegulationMethod = async () => {
-    await fetch("http://127.0.0.1:8000/regulations/", {
+    await fetch("https://ultramacro.onrender.com/regulations/", {
       method: "POST",
       body: JSON.stringify({
         name: Regulation.name,

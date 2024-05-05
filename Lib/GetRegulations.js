@@ -1,5 +1,5 @@
 export default async function GetRegulations(key) {
-  const response = await fetch("http://127.0.0.1:8000/regulations/", {
+  const response = await fetch("https://ultramacro.onrender.com/regulations/", {
     headers: {
       Authorization: `Bearer ${key}`,
     },

@@ -32,7 +32,7 @@ export const EditStudent = ({
   };
   const router = useRouter();
   const handleUpdate = async () => {
-    await fetch(`http://127.0.0.1:8000/students/${id}/`, {
+    await fetch(`https://ultramacro.onrender.com/students/${id}/`, {
       method: "PUT",
       headers: {
         Accept: "application/json",

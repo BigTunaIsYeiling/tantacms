@@ -55,7 +55,7 @@ export const AddUser = ({ admin, data }) => {
   };
   const router = useRouter();
   const AddUserMethod = async () => {
-    await fetch("http://127.0.0.1:8000/accounts/", {
+    await fetch("https://ultramacro.onrender.com/accounts/", {
       method: "POST",
       body: JSON.stringify(user),
       headers: {

@@ -38,7 +38,7 @@ export const AddDivision = ({ data, regulations }) => {
     regulation: null,
   });
   const AddDivisionMethod = async () => {
-    await fetch("http://127.0.0.1:8000/divisions/", {
+    await fetch("https://ultramacro.onrender.com/divisions/", {
       method: "POST",
       body: JSON.stringify(division),
       headers: {

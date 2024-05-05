@@ -1,5 +1,5 @@
 export default async function GetAccounts(key) {
-  const response = await fetch("http://127.0.0.1:8000/accounts/", {
+  const response = await fetch("https://ultramacro.onrender.com/accounts/", {
     cache: "no-store",
     headers: {
       Authorization: `Bearer ${key}`,

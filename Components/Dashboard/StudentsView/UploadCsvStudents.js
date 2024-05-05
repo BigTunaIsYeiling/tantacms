@@ -34,7 +34,7 @@ const UploadCSV = () => {
       position: "top-center",
     });
     fetch(
-      `http://127.0.0.1:8000/data/upload_enrollments/${
+      `https://ultramacro.onrender.com/data/upload_enrollments/${
         regulation === undefined || !regulation
           ? ""
           : `?regulation=${regulation}`

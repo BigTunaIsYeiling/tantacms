@@ -57,7 +57,7 @@ export const DeleteUser = ({ id }) => {
             variant="contained"
             color="success"
             onClick={async () => {
-              await fetch(`http://127.0.0.1:8000/accounts/${id}/`, {
+              await fetch(`https://ultramacro.onrender.com/accounts/${id}/`, {
                 method: "DELETE",
                 headers: {
                   Accept: "application/json",

@@ -26,7 +26,7 @@ export const EditEnrollment = ({ id, points, grade, mark, fullMark }) => {
     if (Number(Data.mark) > fullMark) {
       return toast.error("Mark cannot be greater than full mark");
     }
-    await fetch(`http://127.0.0.1:8000/enrollments/${id}/`, {
+    await fetch(`https://ultramacro.onrender.com/enrollments/${id}/`, {
       method: "PATCH",
       headers: {
         Accept: "application/json",

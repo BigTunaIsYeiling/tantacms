@@ -27,7 +27,7 @@ export const DeleteStudent = ({ id }) => {
   };
   const router = useRouter();
   const handleDelete = async () => {
-    await fetch(`http://127.0.0.1:8000/students/${id}/`, {
+    await fetch(`https://ultramacro.onrender.com/students/${id}/`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",

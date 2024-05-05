@@ -57,7 +57,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
   ];
   const router = useRouter();
   const Logout = async () => {
-    await fetch("http://127.0.0.1:8000/accounts/logout/", {
+    await fetch("https://ultramacro.onrender.com/accounts/logout/", {
       method: "POST",
       headers: {
         Accept: "application/json",

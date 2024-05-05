@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 
 export async function verifyAccess() {
-  const response = await fetch("http://127.0.0.1:8000/accounts/login/verify/", {
+  const response = await fetch("https://ultramacro.onrender.com/accounts/login/verify/", {
     method: "POST",
     headers: {
       Accept: "application/json",

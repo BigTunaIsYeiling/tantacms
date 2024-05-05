@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 export async function Login(data) {
   const email = data.get("email");
   const password = data.get("password");
-  const response = await fetch("http://127.0.0.1:8000/accounts/login/", {
+  const response = await fetch("https://ultramacro.onrender.com/accounts/login/", {
     method: "POST",
     body: JSON.stringify({
       email,
@@ -30,7 +30,7 @@ export async function AddUserAction(data) {
   const first_name = data.get("first_name");
   const last_name = data.get("last_name");
   const is_admin = data.get("is_admin");
-  const response = await fetch("http://127.0.0.1:8000/accounts/", {
+  const response = await fetch("https://ultramacro.onrender.com/accounts/", {
     method: "POST",
     body: JSON.stringify({
       username,

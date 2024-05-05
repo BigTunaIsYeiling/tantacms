@@ -31,7 +31,7 @@ const UploadCSVCourses = () => {
       position: "top-center",
     });
     fetch(
-      `http://127.0.0.1:8000/data/upload_courses/${
+      `https://ultramacro.onrender.com/data/upload_courses/${
         regulation === undefined || !regulation
           ? ""
           : `?regulation=${regulation}`

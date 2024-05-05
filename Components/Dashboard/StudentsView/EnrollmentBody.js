@@ -26,7 +26,7 @@ export const EnrollmentBody = ({ id, open }) => {
     }).then((res) => res.json());
   };
   const { data, isLoading, mutate } = useSWR(
-    `http://127.0.0.1:8000/students/${id}/`,
+    `https://ultramacro.onrender.com/students/${id}/`,
     fetcher
   );
   if (isLoading || !data) {
