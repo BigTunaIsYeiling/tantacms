@@ -28,6 +28,7 @@ import { ResetFilters } from "@/Lib/FiltersSlices/CoursesSlice";
 import { ResetFiltersStu } from "@/Lib/FiltersSlices/StudentsSlice";
 import { PiGraduationCapFill } from "react-icons/pi";
 import { ResetFiltersgrad } from "@/Lib/FiltersSlices/GraduatesSlice";
+import { TbSection } from "react-icons/tb";
 const NavigationBar = ({ admin, data, user, accounts }) => {
   const pathname = usePathname();
   const navi = useRef();
@@ -40,6 +41,10 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
     },
     {
       text: "Departments",
+      path: "/Dashboard/Departments",
+    },
+    {
+      text: "Divisions",
       path: "/Dashboard/Divisions",
     },
     {
@@ -113,6 +118,14 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                   />
                 )}
                 {i === 1 && (
+                  <TbSection
+                    color={
+                      pathname === "/Dashboard/Departments" ? "#F6490D" : "#777"
+                    }
+                    size={"22px"}
+                  />
+                )}
+                {i === 2 && (
                   <CgListTree
                     color={
                       pathname === "/Dashboard/Divisions" ? "#F6490D" : "#777"
@@ -120,7 +133,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                     size={"22px"}
                   />
                 )}
-                {i === 2 && (
+                {i === 3 && (
                   <IoIosPeople
                     color={
                       pathname.startsWith("/Dashboard/Students")
@@ -130,7 +143,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                     size={"22px"}
                   />
                 )}
-                {i === 3 && (
+                {i === 4 && (
                   <PiGraduationCapFill
                     color={
                       pathname === "/Dashboard/Graduates" ? "#F6490D" : "#777"
@@ -138,7 +151,7 @@ const NavigationBar = ({ admin, data, user, accounts }) => {
                     size={"22px"}
                   />
                 )}
-                {i === 4 && (
+                {i === 5 && (
                   <SiCoursera
                     color={
                       pathname === "/Dashboard/Courses" ? "#F6490D" : "#777"
