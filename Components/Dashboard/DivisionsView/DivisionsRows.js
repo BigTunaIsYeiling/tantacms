@@ -4,11 +4,11 @@ export default function DivisionsRows({
   id,
   name,
   hours,
-  department,
-  department2,
+  department_1,
+  department_2,
   group,
   special,
-  regulation
+  regulation,
 }) {
   const GetCondition = () => {
     if (group) return "Group";
@@ -20,8 +20,8 @@ export default function DivisionsRows({
       <TableCell component="th">{id}</TableCell>
       <TableCell align="left">{name}</TableCell>
       <TableCell align="left">
-        {department ? department.name : ""}
-        {department2 ? " / " + department2.name : ""}
+        {department_1 ? department_1.name : ""}
+        {department_2 ? " / " + department_2.name : ""}
       </TableCell>
       <TableCell align="left">{hours}</TableCell>
       <TableCell align="left">{GetCondition()}</TableCell>
