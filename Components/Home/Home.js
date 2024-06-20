@@ -24,7 +24,7 @@ export default function HomePage() {
           component={"form"}
           action={async (data) => {
             const result = await Login(data);
-            if (result.error) {
+            if (result?.error) {
               toast.error("خطا في الحساب او كلمه السر");
             }
           }}
