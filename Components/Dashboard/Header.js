@@ -44,7 +44,7 @@ const Header = ({ data }) => {
   };
   const router = useRouter();
   const Logout = async () => {
-    await fetch("https://ultramacro.onrender.com/accounts/logout/", {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/logout/`, {
       method: "POST",
       headers: {
         Accept: "application/json",

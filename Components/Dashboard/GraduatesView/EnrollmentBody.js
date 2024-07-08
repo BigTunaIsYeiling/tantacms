@@ -25,7 +25,7 @@ export const EnrollmentBody = ({ id, open }) => {
     }).then((res) => res.json());
   };
   const { data, isLoading, mutate } = useSWR(
-    `https://ultramacro.onrender.com/students/${id}/`,
+    `${process.env.NEXT_PUBLIC_BASE_URL}students/${id}/`,
     fetcher
   );
   if (isLoading || !data) {

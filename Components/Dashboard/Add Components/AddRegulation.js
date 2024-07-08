@@ -30,7 +30,7 @@ export const AddRegulation = () => {
     max_gpa: "",
   });
   const AddRegulationMethod = async () => {
-    await fetch("https://ultramacro.onrender.com/regulations/", {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}regulations/`, {
       method: "POST",
       body: JSON.stringify({
         name: Regulation.name,

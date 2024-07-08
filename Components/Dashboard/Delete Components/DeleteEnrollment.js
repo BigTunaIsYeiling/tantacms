@@ -27,7 +27,7 @@ export const DeleteEnrollment = ({ id }) => {
   };
   const router = useRouter();
   const handleDelete = async () => {
-    await fetch(`https://ultramacro.onrender.com/enrollments/${id}/`, {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}enrollments/${id}/`, {
       method: "DELETE",
       headers: {
         Accept: "application/json",

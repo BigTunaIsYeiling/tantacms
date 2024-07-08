@@ -22,7 +22,7 @@ export const EditRegulation = ({ id, name, max_gpa }) => {
   };
   const router = useRouter();
   const handleUpdate = async () => {
-    await fetch(`https://ultramacro.onrender.com/regulations/${id}/`, {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}regulations/${id}/`, {
       method: "PUT",
       headers: {
         Accept: "application/json",

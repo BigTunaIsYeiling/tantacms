@@ -32,7 +32,7 @@ export const EditStudent = ({
   };
   const router = useRouter();
   const handleUpdate = async () => {
-    await fetch(`https://ultramacro.onrender.com/students/${id}/`, {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}students/${id}/`, {
       method: "PUT",
       headers: {
         Accept: "application/json",

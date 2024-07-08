@@ -1,6 +1,6 @@
 export default async function GetCourses({ key, regulation }) {
   const response = await fetch(
-    `https://ultramacro.onrender.com/courses/${
+    `${process.env.NEXT_PUBLIC_BASE_URL}courses/${
       regulation === undefined || !regulation ? "" : `?regulation=${regulation}`
     }`,
     {

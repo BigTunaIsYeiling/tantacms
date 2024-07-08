@@ -31,7 +31,7 @@ const UploadCSVCourses = () => {
       position: "top-center",
     });
     fetch(
-      `https://ultramacro.onrender.com/data/upload_courses/${
+      `${process.env.NEXT_PUBLIC_BASE_URL}data/upload_courses/${
         regulation === undefined || !regulation
           ? ""
           : `?regulation=${regulation}`

@@ -1,5 +1,5 @@
 export default async function GetGroups(key) {
-  const response = await fetch("https://ultramacro.onrender.com/divisions/?group=true", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}divisions/?group=true`, {
     headers: {
       Authorization: `Bearer ${key}`,
     },

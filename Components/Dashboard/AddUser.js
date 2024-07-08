@@ -55,7 +55,7 @@ export const AddUser = ({ admin, data }) => {
   };
   const router = useRouter();
   const AddUserMethod = async () => {
-    await fetch("https://ultramacro.onrender.com/accounts/", {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/`, {
       method: "POST",
       body: JSON.stringify(user),
       headers: {

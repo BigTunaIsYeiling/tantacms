@@ -5,18 +5,21 @@ import { revalidatePath } from "next/cache";
 export async function Login(data) {
   const email = data.get("email");
   const password = data.get("password");
-  const response = await fetch("https://ultramacro.onrender.com/accounts/login/", {
-    method: "POST",
-    body: JSON.stringify({
-      email,
-      password,
-    }),
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    cache: "no-store",
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_BASE_URL}accounts/login/`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      cache: "no-store",
+    }
+  );
   const res = await response.json();
   if (res.accessToken) {
     cookies().set("accessToken", res.accessToken);
@@ -30,7 +33,7 @@ export async function AddUserAction(data) {
   const first_name = data.get("first_name");
   const last_name = data.get("last_name");
   const is_admin = data.get("is_admin");
-  const response = await fetch("https://ultramacro.onrender.com/accounts/", {
+  const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}accounts/`, {
     method: "POST",
     body: JSON.stringify({
       username,

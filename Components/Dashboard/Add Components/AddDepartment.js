@@ -26,7 +26,7 @@ export const AddDepartment = () => {
     name: "",
   });
   const AddDepartmentMethod = async () => {
-    await fetch("https://ultramacro.onrender.com/departments/", {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}departments/`, {
       method: "POST",
       body: JSON.stringify({
         name: department.name,

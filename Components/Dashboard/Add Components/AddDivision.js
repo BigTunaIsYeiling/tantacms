@@ -38,7 +38,7 @@ export const AddDivision = ({ data, regulations }) => {
     regulation: null,
   });
   const AddDivisionMethod = async () => {
-    await fetch("https://ultramacro.onrender.com/divisions/", {
+    await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}divisions/`, {
       method: "POST",
       body: JSON.stringify(division),
       headers: {
